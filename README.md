@@ -17,6 +17,7 @@ We have versions of these steps laid out for each of our systems so please pick 
 # Our Assumptions
 
 These guides presume the reader knows:
+* how to use GitHub and git repositories.
 * how to use SSH on their computer in order to remotely login to another machine. If you are not familiar with SSH please search for "how to use ssh on _linux or windows or mac_".
 * how to navigate a linux terminal and shell environment. Your default login shell (BASH, ZSH, etc.) can be selected via [ALCF Accounts Page](accounts.alcf.anl.gov).
 
