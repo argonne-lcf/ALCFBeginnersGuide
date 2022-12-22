@@ -52,9 +52,9 @@ mpiexec -n $GPUS_PER_NODE -ppn $GPUS_PER_NODE echo Hello World
 
 You'll notice we can use the `#PBS` line prefix at the top of our script to set `qsub` command line options. We can still use the command line to override the options in the script. 
 
-NOTE: here we used `-o logs/` and `-e logs/` which just redirects the STDOUT(`-o`) and the STDERR(`-e`) log files from the job into the `logs/` directory to keep things tidy.
+> NOTE: here we used `-o logs/` and `-e logs/` which just redirects the STDOUT(`-o`) and the STDERR(`-e`) log files from the job into the `logs/` directory to keep things tidy.
 
-NOTE: Job scripts must be executable so we need to run `chmod a+x job_script.sh`.
+> NOTE: Job scripts must be executable so we need to run `chmod a+x job_script.sh`.
 
 Now submit our job (don't forget to change `<project-name>`):
 ```bash
