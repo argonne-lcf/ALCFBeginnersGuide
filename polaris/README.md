@@ -45,7 +45,31 @@ Users should use project spaces for large scale storage and software installatio
 Next, clone this repository into your home directory using:
 ```bash
 git clone https://github.com/argonne-lcf/ALCFBeginnersGuide.git
+cd ALCFBeginnersGuide
 ```
 
 ![clone](media/polaris_git_clone_repo.gif)
+
+## Getting to know the environment
+
+ALCF uses [Environment Modules](https://modules.readthedocs.io/en/latest/index.html) to provide users with loadable software packages. This includes compilers, python installations, and other software. Here are some basic commands:
+
+```bash
+# list currently loaded modules
+module list
+# list all available modules
+module avail
+# list all available modules including the string "gcc"
+module avail gcc
+# show information about a module and lists commands that alter environment
+module show gcc/11.2.0
+# load a module
+module load gcc/11.2.0
+# unload a module (not always supported, like with Conda enviroments after activate is called)
+module unload gcc/11.2.0
+```
+
+![modules](media/polaris_modules.gif)
+
+## [NEXT ->](00_scheduler.md)
 

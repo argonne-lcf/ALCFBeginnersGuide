@@ -20,6 +20,7 @@ These guides presume the reader knows:
 * how to use GitHub and git repositories.
 * how to use SSH on their computer in order to remotely login to another machine. If you are not familiar with SSH please search for "how to use ssh on _linux or windows or mac_".
 * how to navigate a linux terminal and shell environment. Your default login shell (BASH, ZSH, etc.) can be selected via [ALCF Accounts Page](accounts.alcf.anl.gov).
+* how to compile software in a linux environment using `gcc`/`g++`/`clang++`.
 
 # What is a Supercomputer?
 
