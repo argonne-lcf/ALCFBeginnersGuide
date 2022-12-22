@@ -51,9 +51,10 @@ mpiexec -n $GPUS_PER_NODE -ppn $GPUS_PER_NODE echo Hello World
 ```
 
 You'll notice we can use the `#PBS` line prefix at the top of our script to set `qsub` command line options. We can still use the command line to override the options in the script. 
+
 NOTE: here we used `-o logs/` and `-e logs/` which just redirects the STDOUT(`-o`) and the STDERR(`-e`) log files from the job into the `logs/` directory to keep things tidy.
 
-Note: Job scripts must be executable so we need to run `chmod a+x job_script.sh`.
+NOTE: Job scripts must be executable so we need to run `chmod a+x job_script.sh`.
 
 Now submit our job (don't forget to change `<project-name>`):
 ```bash
@@ -69,3 +70,87 @@ qstat -u <username>
 without specifying the `username` we will get a full printout of every job queued and running. This can be overwhelming so using the `username` reduces the output to jobs for just that `username`.
 
 ![polaris_hello_world](media/polaris_qsub_hello_world.gif)
+
+The default output of `qstat -u <username>` is shown here:
+
+![polaris_qstat_default](media/polaris_qstat_default.png)
+
+You can see the PBS Job ID, Submitter's Username, Queue name, Job name (defaults to shell script file name but can be specified via `qsub` options), Session ID, Number of Nodes (NDS), Tasks, Required Memory (we didn't specify), Required Wall-time in hours:minutes, State (R=RUNNING,Q=QUEUED see man-page for more), and Elapsed Time.
+
+## Delete your job
+
+Sometimes you may want to remove a submitted job from the scheduler. This can be done using
+```bash
+qdel <job-id>
+```
+
+## Job output
+
+Any job STDOUT or STDERR output will go into two different files that by default are named:
+```bash
+<pbs-job-id>.ER
+<pbs-job-id>.OU
+```
+In our example submit script, we specify `-o logs/` and `-e logs/` so that the files go into the `logs/` directory.
+
+# PBS CHEATSHEET
+
+## User Commands
+
+| Command | Description |
+| -- | --- |
+| `qsub` | Submit a job |
+| `qsub -I` | Submit an interactive job |
+| `qstat <jobid>` | Job status |
+| `qstat -Q` | Print Queue information |
+| `qstat -B` | Cluster status |
+| `qstat -x` | Job History  |
+| `qstat -f <jobid>` | Job status with all information |
+| `qstat -ans` | Job status with comments and vnode info  |
+| `qhold <jobid>` | Hold a job |
+| `qrls <jobid>` | Release a job |
+| `pbsnodes -a` | Print node information |
+| `pbsnodes -l` | Print nodes that are offline or down |
+| `qdel <jobid>` | kill a job |
+| `qdel -W force <jobid>` | Force kill a job |
+| `qmove` | Moves PBS batch job between queues |
+| `qalter` | Alters a PBS job |
+| `pbs_rstat` | Shows status of PBS advance or standing reservations |
+
+## QSUB Options
+
+| Option | Description |
+| -- | --- |
+| `-P project_name` | Specifying a project name |
+| `-q destination` |  Specifying queue and/or server |
+| `-r value` |  Marking a job as rerunnable or not |
+| `-W depend = list` |  Specifying job dependencies  |
+| `-W stagein=list stageout=list` |  Input/output file staging |
+| `-W sandbox=<value>` |  Staging and execution directory: user's home vs. job-specific |
+| `-a date_time` |  Deferring execution  |
+| `-c interval` |  Specifying job checkpoint interval  |
+| `-e path` |  Specifying path for output and error files |
+| `-h` |  Holding a job (delaying execution) |
+| `-J X-Y[:Z}` |  Defining job array  |
+| `-j join` |  Merging output and error files |
+| `-k keep` |  Retaining output and error files on execution host |
+| `-l resource_list` |  Requesting job resources  |
+| `-M user_list` |  Setting email recipient list |
+| `-m MailOptions` |  Specifying email notification |
+| `-N name` |  Specifying a job name |
+| `-o path` |  Specifying path for output and error files  |
+
+## Environment Variables
+Your job will have access to these environment variables
+
+| Option | Description |
+| -- | --- |
+| `PBS_JOBID` |  Job identifier given by PBS when the job is submitted. Created upon execution |
+| `PBS_JOBNAME` |  Job name given by user. Created upon execution |
+| `PBS_NODEFILE` |  The filename containing a list of vnodes assigned to the job. |
+| `PBS_O_WORKDIR` |  Absolute path to directory where qsub is run. Value taken from user’s submission environment.  |
+| `TMPDIR` |  Pathname of job’s scratch directory |
+| `NCPUS` |  Number of threads, defaulting to number of CPUs, on the vnode |
+| `PBS_ARRAY_ID` |  Identifier for job arrays. Consists of sequence number. |
+| `PBS_ARRAY_INDEX` |  Index number of subjob in job array. |
+| `PBS_JOBDIR` |  Pathname of job’s staging and execution directory on the primary execution host.  |
