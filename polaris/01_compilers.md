@@ -6,7 +6,7 @@ The `module avail` command will show you all the compilers that are available in
 
 When you first login to Polaris, the version of `gcc`/`g++` will be from the OS installation, which is typically old and not intended for use. Doing `module load gcc` will give you a default version of `gcc`/`g++` that is more recent (11.2.0 as of this writing).
 
-### Example code: `example.cpp`
+### Example code: [`01_example.cpp`](examples/01_example.cpp)
 ```c++
 #include <iostream>
 
@@ -17,7 +17,7 @@ int main(void){
 }
 ```
 
-Build and run on Polaris
+Build and run on a Polaris login node or worker node
 ```bash
 module load gcc
 g++ example.cpp -o example_cpp
@@ -36,7 +36,7 @@ module load cudatoolkit-standalone gcc
 ```
 This will add the path to these software to your `PATH` and `LD_LIBRARY_PATH` environment variables. Then you should be able to use `gcc`/`g++` and `nvcc` as usual to build your code.
 
-### Example code: `example.cu`
+### Example code: [`01_example.cu`](examples/01_example.cu)
 ```c++
 #include <iostream>
 #include <cmath>
@@ -150,7 +150,7 @@ module load cudatoolkit-standalone gcc
 nvcc -arch=sm_80 example.cu -o example_cu
 ```
 
-Now you can create a job script: `submit.sh`
+### Submit script: [`01_example.sh`](examples/01_example.sh)
 ```bash
 #!/bin/bash
 #PBS -l select=1
@@ -168,10 +168,10 @@ module load cudatoolkit-standalone gcc
 
 and submit your job:
 ```bash
-qsub submit.sh
+qsub 01_example.sh
 ```
 
-The output should look like this in the `submit.sh.o<jobID>` file:
+The output should look like this in the `01_example.sh.o<jobID>` file:
 ```
 gpu time: 0.000716863
 cpu time: 0.274146

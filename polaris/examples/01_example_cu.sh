@@ -7,4 +7,4 @@
 
 module load cudatoolkit-standalone gcc
 
-./example_cu
+/path/to/example_cu
