@@ -4,7 +4,9 @@
 #PBS -q debug
 #PBS -l filesystems=home
 #PBS -A datascience
+#PBS -o logs/
+#PBS -e logs/
 
-module load cudatoolkit-standalone gcc
+module load cudatoolkit-standalone/11.8.0
 
-/path/to/example_cu
+/path/to/ALCFBeginnersGuide/polaris/examples/example_cu
