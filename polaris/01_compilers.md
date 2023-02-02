@@ -349,3 +349,5 @@ echo "NUM_OF_NODES= ${NNODES} TOTAL_NUM_RANKS= ${NTOTRANKS} RANKS_PER_NODE= ${NR
 mpiexec -n ${NTOTRANKS} --ppn ${NRANKS_PER_NODE} /home/parton/ALCFBeginnersGuide/polaris/examples/01_example_mpi
 
 ```
+
+![example_mpi](media/01_example_mpi_example.gif)
