@@ -3,10 +3,10 @@
 #PBS -l walltime=00:10:00
 #PBS -q debug
 #PBS -l filesystems=home
-#PBS -A datascience
+#PBS -A <project-name>
 #PBS -o logs/
 #PBS -e logs/
 
 module load cudatoolkit-standalone/11.8.0
 
-/path/to/ALCFBeginnersGuide/polaris/examples/example_cu
+$HOME/ALCFBeginnersGuide/polaris/examples/01_example_cu
