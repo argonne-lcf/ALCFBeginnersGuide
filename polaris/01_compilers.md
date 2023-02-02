@@ -181,6 +181,8 @@ gpu time: 0.000716863
 cpu time: 0.274146
 ```
 
+![example_cu](media/01_compilers_cu_example.gif)
+
 
 # Compiling C/C++ with MPI
 
