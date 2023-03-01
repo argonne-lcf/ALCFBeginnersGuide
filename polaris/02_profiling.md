@@ -69,15 +69,9 @@ $ ncu --help
 
 ## A quick example
 
+### Build an example
 ![Build_an_example](media/02_terminal_01.gif)
 
-![Run_nsys_ncu](media/02_terminal_02.gif)
-
-![nsys_client](media/02_nsys_mov.gif)
-
-![ncu_client](media/02_ncu_mov.gif)
-
-### Build an example
 ```
 jkwack@polaris-login-04:~> qsub -I -l walltime=1:00:00 -l filesystems=home:grand -q debug -A Performance
 qsub: waiting for job 443287.polaris-pbs-01.hsn.cm.polaris.alcf.anl.gov to start
@@ -191,6 +185,8 @@ Dot         1210774.906 0.00044     0.00046     0.00045
 ```
 
 ### Nsight Systems
+![Run_nsys_ncu](media/02_terminal_02.gif)
+
 #### Running a stream benchmark with Nsight Systems
 ```
 jkwack@x3004c0s31b1n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream/build_polaris> nsys profile -o nsys-BableStream --stats=true ./cuda-stream
@@ -280,6 +276,7 @@ Generated:
 ```
 
 #### Reviewing the Nsight Systems data via GUI
+![nsys_client](media/02_nsys_mov.gif)
 ![Nsys_screenshot](media/02_nsys_plot01.png)
 
 
@@ -508,6 +505,7 @@ Dot         844053.045  0.00064     0.00073     0.00068
 ```
 
 #### Reviewing the Nsight Compute data via GUI
+![ncu_client](media/02_ncu_mov.gif)
 ![Ncu_Details](media/02_ncu_Plots_Details.png)
 ![Ncu_SOL](media/02_ncu_Plots_SOL.png)
 ![Ncu_Roofline](media/02_ncu_Plots_Roofline.png)
