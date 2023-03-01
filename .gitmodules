@@ -1,0 +1,3 @@
+[submodule "polaris/examples/BabelStream"]
+	path = polaris/examples/BabelStream
+	url = https://github.com/UoB-HPC/BabelStream.git
