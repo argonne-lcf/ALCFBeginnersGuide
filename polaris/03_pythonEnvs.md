@@ -13,7 +13,21 @@
 > Refer to
 > [job scheduling and execution](https://docs.alcf.anl.gov/running-jobs/job-and-queue-scheduling/)
 > for additional information.
-  
+>
+
+> **Warning**
+> <br> In addition, all example paths specified below should be replaced by a
+> suitably chosen destination.
+>
+> For example,
+> ```Shell
+> /path/to/miniconda3/envs/
+> ```
+> would be replaced by
+> ```Shell
+> /lus/grand/projects/datascience/foremans/miniconda3/envs/
+> ```
+
 </p>
 </details>
 
@@ -26,9 +40,9 @@ We provide pre-built `conda` environments, ready-to-go with your all[^all] your 
   - [Horovod](https://horovod.readthedocs.io/en/stable/pytorch.html)
   - [DeepSpeed](https://docs.alcf.anl.gov/polaris/data-science-workflows/frameworks/deepspeed/)
 - [JAX](https://jax.readthedocs.io/en/latest/)
-- [`mpi4py`](https://mpi4py.readthedocs.io/en/stable/)
+- [mpi4py](https://mpi4py.readthedocs.io/en/stable/)
 
-To load and activate the default[^versions] `conda` environment[^conda1]:
+To load and activate the default[^versions] `conda` environment[^conda1], simply:
 
 ```Shell
 module load conda ; conda activate base
@@ -83,6 +97,11 @@ conda activate /path/to/envs/base-clone
 > outside of your `$HOME` directory, if possible.
 > e.g.  
 > `mkdir -p "/grand/<project>/${USER}/miniconda3/envs"`
+
+
+## Additional Resources
+
+- [ALCF Docs: Python on Polaris](https://docs.alcf.anl.gov/polaris/data-science-workflows/python/)
 
 
 [^versions]:
