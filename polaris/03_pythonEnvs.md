@@ -1,9 +1,5 @@
 # Python Environments
 
-## Overview
-
-
-
 We provide pre-built `conda` environments, ready-to-go with your all[^all] your favorite GPU-supported python libraries:
 
 - [TensorFlow](https://docs.alcf.anl.gov/polaris/data-science-workflows/frameworks/tensorflow/) **\+**
@@ -32,14 +28,12 @@ To load and activate the default[^versions] `conda` environment[^conda1]:
 module load conda ; conda activate base
 ```
 
-## Extending the default environment
-
 If you need to install additional packages, there are two approaches:
 
 1. [Virtual environments via `venv`](#virtual-environment-via-venv)
 2. [Clone the base `conda` environment](#clone-conda-environment)
 
-### Virtual Environment via `venv`
+## Virtual Environment via `venv`
 
 The most straightforward approach uses `venv` to create a new virtual
 environment _on top of_ our existing (`conda`) environment.
@@ -49,17 +43,23 @@ isolated environment into which we can install new packages, while taking
 advantage of the pre-built libraries from `conda`.
 
 ```Shell
-python3 -m venv /path/to/new/virtual/environment --system-site-packages
+python3 -m venv /path/to/venvs/base --system-site-packages
+```
+
+To activate this new environment,
+
+```Shell
+source /path/to/venvs/base/bin/activate
 ```
 
 To install a different version of a package that is already installed in the
-base environment, you can
+base environment,
 
 ```Shell
 python3 -m pip install --ignore-installed <new-package>
 ```
 
-### Clone Conda Environment
+## Clone Conda Environment
 
 If you need additional packages that require a `conda install`, you can create
 a `clone` of the base environment by:
