@@ -93,9 +93,11 @@ conda activate /path/to/envs/base-clone
 > **Warning**
 > <br> Creating a clone of the base enviroment
 > can be quite slow (and large).
+>
 > It is recommended to create this clone somewhere
 > outside of your `$HOME` directory, if possible.
-> e.g.  
+>
+> For example,
 > `mkdir -p "/grand/<project>/${USER}/miniconda3/envs"`
 
 
