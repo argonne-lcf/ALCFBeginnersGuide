@@ -1,16 +1,8 @@
 # Python Environments
 
-We provide pre-built `conda` environments, ready-to-go with your all[^all] your favorite GPU-supported python libraries:
-
-- [TensorFlow](https://docs.alcf.anl.gov/polaris/data-science-workflows/frameworks/tensorflow/) **\+**
-  - [Horovod](https://horovod.readthedocs.io/en/stable/tensorflow.html)
-- [PyTorch](https://docs.alcf.anl.gov/polaris/data-science-workflows/frameworks/pytorch/) **\+**
-  - [DDP](https://pytorch.org/tutorials/beginner/dist_overview.html)
-  - [Horovod](https://horovod.readthedocs.io/en/stable/pytorch.html)
-  - [DeepSpeed](https://docs.alcf.anl.gov/polaris/data-science-workflows/frameworks/deepspeed/)
-- [JAX](https://jax.readthedocs.io/en/latest/)
-- [`mpi4py`](https://mpi4py.readthedocs.io/en/stable/)
-
+<details closed><summary><b>ℹ️ Note: Job Setup</b></summary>
+<p>
+  
 > **Note**
 > <br> The instructions below should be **ran directly from a compute node**.
 >
@@ -21,6 +13,20 @@ We provide pre-built `conda` environments, ready-to-go with your all[^all] your 
 > Refer to
 > [job scheduling and execution](https://docs.alcf.anl.gov/running-jobs/job-and-queue-scheduling/)
 > for additional information.
+  
+</p>
+</details>
+
+We provide pre-built `conda` environments, ready-to-go with your all[^all] your favorite GPU-supported python libraries:
+
+- [TensorFlow](https://docs.alcf.anl.gov/polaris/data-science-workflows/frameworks/tensorflow/) **\+**
+  - [Horovod](https://horovod.readthedocs.io/en/stable/tensorflow.html)
+- [PyTorch](https://docs.alcf.anl.gov/polaris/data-science-workflows/frameworks/pytorch/) **\+**
+  - [DDP](https://pytorch.org/tutorials/beginner/dist_overview.html)
+  - [Horovod](https://horovod.readthedocs.io/en/stable/pytorch.html)
+  - [DeepSpeed](https://docs.alcf.anl.gov/polaris/data-science-workflows/frameworks/deepspeed/)
+- [JAX](https://jax.readthedocs.io/en/latest/)
+- [`mpi4py`](https://mpi4py.readthedocs.io/en/stable/)
 
 To load and activate the default[^versions] `conda` environment[^conda1]:
 
