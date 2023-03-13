@@ -25,7 +25,7 @@ From a terminal:
 ```Shell
 # Source required conda environment variables from appropriate shell
 . /soft/systems/jupyterhub/miniconda3/etc/profile.d/conda.sh
-#set shell proxy variables to access external URL
+# set shell proxy variables to access external URL
 export http_proxy=http://proxy.alcf.anl.gov:3128
 export https_proxy=$http_proxy
 
@@ -88,6 +88,53 @@ notebook.
 
 ## Accessing Project Folders
 
+From within the JupyterHub file browser, users are limited to viewing files
+within their home directory.
+
+To access project directories located outside of your `$HOME`, a symbolic link
+to the directory must be created.
+
+Explicitly, if a user wants to access project `ABC`, we can create a symbolic
+link by
+
+```Shell
+# from terminal
+cd ~
+ln -s /project/ABC ABC_project
+ln -s /lus/theta-fs0/projects/EFG EFG_project
+# from notebook
+!ln -s /project/ABC ABC_project
+!ln -s /lus/theta-fs0/projects/EFG EFG_project
+```
+
+## Running Notebook on a Compute Node
+
+The ThetaGPU and Polaris instances of JupyterHub allow users to start Jupyter
+Notebooks directly on compute nodes through the given job scheduler.
+
+The job will be executed according to ALCF's queue and scheduling policy[^timeout]
+
+## Polaris
+
+The Polaris JupyterHub instance does not have a "Local Host Process" option.
+
+All jupyter notebooks are run on a compute node through the job scheduler.
+
+When the user authenticates the user will be presented with a "Start My Server"
+button that once clicked, will present the user with the available job options
+needed to start the notebook.
+
+- Options:
+  - Select a job profile: This field lists the current available Profiles
+    "Polaris Compute Node", etc.
+  - Queue Name: This field provides a list of available queues on the system
+  - Project List: This field displays the list of active projects associated
+    with the user on the given system
+  - Number Chunks: This field allows the user to select the number of compute nodes to be allocated for the job
+  - Runtime (minutes:seconds): This field allows the user to set the runtime of the job in minutes and seconds.
+  - File Systems: This field allows the user to select which file systems are required.
 
 
 [^docs]: Additional information can be found in our [JupyterHub documentation](https://docs.alcf.anl.gov/services/jupyter-hub/)
+[^timeout]: Note: if the queued job does not start within 2 minutes, JupyterHub
+  will timeout and the job will be removed from the queue.
