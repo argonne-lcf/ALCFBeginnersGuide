@@ -97,15 +97,36 @@ to the directory must be created.
 Explicitly, if a user wants to access project `ABC`, we can create a symbolic
 link by
 
+<details open>
+<summary>
+<b>
+From Terminal
+</b>
+</summary>
+<p>
+ 
 ```Shell
 # from terminal
 cd ~
-ln -s /project/ABC ABC_project
-ln -s /lus/theta-fs0/projects/EFG EFG_project
-# from notebook
-!ln -s /project/ABC ABC_project
-!ln -s /lus/theta-fs0/projects/EFG EFG_project
+ln -s /grand/projects/ABC ABC_project
 ```
+</p>
+</details>
+
+<details closed>
+<summary>
+<b>
+From Notebook
+</b>
+</summary>
+<p>
+
+```Shell
+# from notebook
+!ln -s /grand/projects/ABC ABC_project
+```
+</p>
+</details>
 
 ## Running Notebook on a Compute Node
 
