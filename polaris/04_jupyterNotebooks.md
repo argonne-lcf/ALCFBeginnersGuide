@@ -7,6 +7,10 @@ At ALCF, users can use the JupyterHub instances at
 [https://jupyter.alcf.anl.gov](https://jupyter.alcf.anl.gov) to run notebooks
 directly on the compute resource of their choice[^docs].
 
+To login, use your
+[Passcode Token](https://docs.alcf.anl.gov/account-project-management/accounts-and-access/alcf-passcode-tokens/), 
+exactly the same as you would to login to Polaris directly.
+
 We support and maintain a web interface to the [Jupyter Instances at
 ALCF](https://jupyter.alcf.anl.gov/) that can be used to run Jupyter notebooks
 on all of our major systems.
