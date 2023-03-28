@@ -17,72 +17,74 @@ ALCF provides a simple Python environment to start.
 Users can customize their environment to meet their needs by creating a virtual
 python environment and defining new kernels.
 
-We provide below an example of how to set up a simple environment `projectA`
-with module `mpi` from within a notebook.
+As covered in [03_pythonEnvs](./03_pythonEnvs.md), we recommend using 
+virtual environments built on top of our `conda` environments.
+
+We provide below an example of how to set up Jupyter to run with your custom python `venv`.
 
 From a terminal:
 
 ```Shell
-# Source required conda environment variables from appropriate shell
-. /soft/systems/jupyterhub/miniconda3/etc/profile.d/conda.sh
+module load conda ; conda activate base
+# source /poth/to/your/venv/bin/activate
+# conda activate your_conda_env
 # set shell proxy variables to access external URL
 export http_proxy=http://proxy.alcf.anl.gov:3128
 export https_proxy=$http_proxy
+python3 -m ipykernel install \
+    --sys-prefix \
+    --name=<kernel-name> \
+    --display-name=<kernel-display-name> \
+    --env PATH "${PATH}" \
+    --env LD_LIBRARY_PATH "${LD_LIBRARY_PATH}" \
+    --env http_proxy "${http_proxy}" \
+    --env https_proxy "${https_proxy}" \
+    --env MPICH_GPU_SUPPORT_ENABLED "${MPICH_GPU_SUPPORT_ENABLED}" \
+    --env CONDA_PREFIX "${CONDA_PREFIX}"
+# Installed kernelspec <kernel-name> in /path/to/venv/share/jupyter/kernels/<kernel-name>
 
-# create an environment name projectA
-conda create -y -n projectA
-
-# Activate conda environment
-conda activate projectA
-
-# Install required packages
-conda install -y jupyter nb_conda ipykernel mpi
-
-# Add environment to available kernel list
-python -m ipykernel install --user --name projectA
-
-# deactivate conda environment
-conda deactivate
+# Now, we need to create soft link 
+#  from: where the kernelspec was installed to above ^
+#  to: ~/.local/share/jupyter/kernels/
+ln -s ${VIRTUAL_ENV}/share/jupyter/kernels/<kernel-name> ~/.local/share/jupyter/kernels/
 ```
 
-Once the base environment is setup, the user must add an `env` section to the
-`kernel.json` file, located in `${USER}/.local/share/jupyter/kernels/projecta`,
-defining the `$CONDA_PREFIX` and `$PATH` variables.
-
-Currently, Polaris compute nodes access the internet through a proxy.
+<!--Currently, Polaris compute nodes access the internet through a proxy.
 
 To configure the kernel to use the proxy, add variables `http_proxy`, and
 `https_proxy` to the `env` section.
 
 This will allow users to install packages from the notebook using `!conda`
-magic commands.
+magic commands.-->
 
 We provide a sample configuration below:
 
 ```json
 {
  "argv": [
-  "/home/<user>/.conda/envs/projectA/bin/python",
+  "/lus/grand/projects/datascience/foremans/locations/polaris/projects/saforem2/Megatron-DeepSpeed/venvs/polaris/2023-01-10/bin/python3",
   "-m",
   "ipykernel_launcher",
   "-f",
   "{connection_file}"
  ],
- "display_name": "projectA",
+ "display_name": "[Polaris:2023-01-10] MegatronDeepSpeed",
  "language": "python",
- "env": {
-    "CONDA_PREFIX":"/home/<user>/.conda/envs/projecta",
-    "PATH":"/home/<user>/.conda/envs/projecta/bin:${PATH}",
-    "http_proxy":"http://proxy.alcf.anl.gov:3128",
-    "https_proxy":"http://proxy.alcf.anl.gov:3128"
- },
  "metadata": {
   "debugger": true
+ },
+ "env": {
+  "PATH": "/lus/grand/projects/datascience/foremans/locations/polaris/projects/saforem2/Megatron-DeepSpeed/venvs/polaris/2023-01-10/bin:/soft/datascience/conda/2023-01-10/mconda3/bin:/soft/datascience/conda/2023-01-10/mconda3/condabin:/soft/compilers/cudatoolkit/cuda-11.8.0/bin:/soft/libraries/nccl/nccl_2.16.2-1+cuda11.8_x86_64/include:/opt/cray/pe/hdf5-parallel/1.12.1.3/bin:/opt/cray/pe/hdf5/1.12.1.3/bin:/opt/cray/pe/pals/1.1.7/bin:/opt/cray/pe/craype/2.7.15/bin:/opt/cray/pe/gcc/11.2.0/bin:/home/foremans/.local/state/fnm_multishells/32267_1680009995525/bin:/home/foremans/.local/state/fnm_multishells/32263_1680009995495/bin:/home/foremans/.fnm:/home/foremans/.linuxbrew/Homebrew/bin:/home/foremans/.linuxbrew/opt/glibc/sbin:/home/foremans/.linuxbrew/opt/glibc/bin:/opt/cray/pe/perftools/22.05.0/bin:/opt/cray/pe/papi/6.0.0.14/bin:/opt/cray/libfabric/1.11.0.4.125/bin:/opt/clmgr/sbin:/opt/clmgr/bin:/opt/sgi/sbin:/opt/sgi/bin:/home/foremans/bin:/usr/local/bin:/usr/bin:/bin:/opt/c3/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/pbs/bin:/sbin:/home/foremans/.linuxbrew/bin:/home/foremans/.linuxbrew/sbin:/home/foremans/.cargo/bin:/home/foremans/.local/bin:/home/foremans/.fzf/bin:/opt/cray/pe/bin",
+  "LD_LIBRARY_PATH": "/soft/compilers/cudatoolkit/cuda-11.8.0/extras/CUPTI/lib64:/soft/compilers/cudatoolkit/cuda-11.8.0/lib64:/soft/libraries/trt/TensorRT-8.5.2.2.Linux.x86_64-gnu.cuda-11.8.cudnn8.6/lib:/soft/libraries/nccl/nccl_2.16.2-1+cuda11.8_x86_64/lib:/soft/libraries/cudnn/cudnn-11-linux-x64-v8.6.0.163/lib:/opt/cray/pe/gcc/11.2.0/snos/lib64:/opt/cray/pe/papi/6.0.0.14/lib64:/opt/cray/libfabric/1.11.0.4.125/lib64",
+  "http_proxy": "http://proxy.alcf.anl.gov:3128",
+  "https_proxy": "http://proxy.alcf.anl.gov:3128",
+  "MPICH_GPU_SUPPORT_ENABLED": "1",
+  "CONDA_PREFIX": "/soft/datascience/conda/2023-01-10/mconda3"
  }
 }
 ```
 
-after completing these steps, you should see `projectA` kernel when you click
+after completing these steps, you should see `<kernel-name>` kernel when you click
 new on the Jupyter Hub home page or when you use Kernel menu in a Jupyter
 notebook.
 
