@@ -39,10 +39,6 @@ python3 -m ipykernel install \
     --env CONDA_PREFIX "${CONDA_PREFIX}"
 # Installed kernelspec <kernel-name> in /path/to/venv/share/jupyter/kernels/<kernel-name>
 
-# Now, we need to create soft link 
-#  from: where the kernelspec was installed to above ^
-#  to: ~/.local/share/jupyter/kernels/
-ln -s ${VIRTUAL_ENV}/share/jupyter/kernels/<kernel-name> ~/.local/share/jupyter/kernels/
 ```
 
 <!--Currently, Polaris compute nodes access the internet through a proxy.
