@@ -56,7 +56,7 @@ $ ncu -i {output_filename}.ncu-rep
 ```
 
 #### Post-processing on your local system via GUI
-* Install NVIDIA Nsight Systems and NVIDIA Nsight Compute after downloading both of them from the  [NVIDIA Developer Zone](https://developer.nvidia.com/).   
+* Install [NVIDIA Nsight Systems](https://developer.nvidia.com/nsight-systems) and [NVIDIA Nsight Compute](https://developer.nvidia.com/nsight-compute) after downloading both of them from the  NVIDIA Developer Zone.   
 Remark: Local client version should be the same as or newer than NVIDIA Nsight tools on Polaris. 
 * Download nsys output files (i.e., ending with .qdrep and . sqlite) to your local system, and then open them with NVIDIA Nsight Systems on your local system.  
 * Download ncu output files (i.e., ending with .ncu-rep) to your local system, and then open them with NVIDIA Nsight Compute on your local system.  
