@@ -11,6 +11,9 @@ To login, use your
 [Passcode Token](https://docs.alcf.anl.gov/account-project-management/accounts-and-access/alcf-passcode-tokens/), 
 exactly the same as you would to login to Polaris directly.
 
+![jup_login](media/04_jupyter_login.gif)
+
+
 We support and maintain a web interface to the [Jupyter Instances at
 ALCF](https://jupyter.alcf.anl.gov/) that can be used to run Jupyter notebooks
 on all of our major systems.
