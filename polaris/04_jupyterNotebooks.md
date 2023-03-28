@@ -29,8 +29,6 @@ module load conda ; conda activate base
 # source /poth/to/your/venv/bin/activate
 # conda activate your_conda_env
 # set shell proxy variables to access external URL
-export http_proxy=http://proxy.alcf.anl.gov:3128
-export https_proxy=$http_proxy
 python3 -m ipykernel install \
     --sys-prefix \
     --name=<kernel-name> \
