@@ -31,7 +31,7 @@ After your job begins, you will be running a shell on a worker node. The environ
 
 The more standard method for running a job is to submit it to the scheduler via `qsub` with a script that will execute your job. Let's walk through an example.
 
-First we need to create a job script (example: [submit_scripts/00_hello_world.sh](submit_scripts/00_hello_world.sh)):
+First we need to create a job script (example: [submit_scripts/00_hello_world.sh](examples/00_hello_world.sh)):
 ```bash
 #!/bin/bash
 #PBS -l select=1
