@@ -7,8 +7,6 @@
 #PBS -o logs/
 #PBS -e logs/
 
-module load cudatoolkit-standalone/11.8.0
-
 # Count number of nodes assigned
 NNODES=`wc -l < $PBS_NODEFILE`
 # set 1 MPI rank per GPU
