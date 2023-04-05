@@ -306,8 +306,6 @@ int main(void){
 On Polaris, when you login there is a module for MPI already loaded, named `cray-mpich` which is a custom build of the [MPICH](https://www.mpich.org/) MPI library. It defines the location of the library installed via the environment variable `MPICH_DIR`. In order to build our code
 
 ```bash
-module load cudatoolkit-standalone
-# need to pass `nvcc` the include path, library path, and library names to link against for MPI
 CC 01_example_mpi.cu -o 01_example_mpi
 ```
 
