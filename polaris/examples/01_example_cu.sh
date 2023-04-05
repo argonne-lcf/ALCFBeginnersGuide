@@ -7,6 +7,6 @@
 #PBS -o logs/
 #PBS -e logs/
 
-module load cudatoolkit-standalone/11.8.0
+
 
 $HOME/ALCFBeginnersGuide/polaris/examples/01_example_cu
