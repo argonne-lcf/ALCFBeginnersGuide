@@ -6,8 +6,8 @@ This section describes how to compile C/C++ code standalone, with CUDA, and with
 
 When you first login to Polaris, there will be a default list of loaded modules (see them with `module list`). This includes the Cray/HPE build environment. The Cray/HPE build system utilizes compiler wrappers:
 - `cc` - C compiler (use it like GNU `gcc`)
-- `CC` - C++ compiler (use it like GPU `g++`)
-- `ftn` - Fortran compiler (use it like GPU `gfortran`)
+- `CC` - C++ compiler (use it like GNU `g++`)
+- `ftn` - Fortran compiler (use it like GNU `gfortran`)
 
 Next an example C++ code is compiled.
 
@@ -148,10 +148,8 @@ int main(void){
 
 Next compile the example using on the login node:
 ```bash
-# load the cuda toolkit and GCC modules
-module load cudatoolkit-standalone/11.8.0
 # compile using NVCC and tell it the GPU Compute arcitecture (SM80)
-nvcc -arch=sm_80 example.cu -o example_cu
+nvcc -arch=sm_80 01_example.cu -o 01_example_cu
 ```
 
 ### Submit script: [`01_example_cu.sh`](examples/01_example_cu.sh)
@@ -167,7 +165,7 @@ nvcc -arch=sm_80 example.cu -o example_cu
 
 module load cudatoolkit-standalone/11.8.0
 
-/path/to/example_cu
+/path/to/01_example_cu
 ```
 
 and submit your job:
