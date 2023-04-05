@@ -148,8 +148,8 @@ int main(void){
 
 Next compile the example using on the login node:
 ```bash
-# compile using NVCC and tell it the GPU Compute arcitecture (SM80)
-nvcc -arch=sm_80 01_example.cu -o 01_example_cu
+# compile using CC, the compute version is already included
+CC 01_example.cu -o 01_example_cu
 ```
 
 ### Submit script: [`01_example_cu.sh`](examples/01_example_cu.sh)
@@ -163,14 +163,12 @@ nvcc -arch=sm_80 01_example.cu -o 01_example_cu
 #PBS -o logs/
 #PBS -e logs/
 
-module load cudatoolkit-standalone/11.8.0
-
 /path/to/01_example_cu
 ```
 
 and submit your job:
 ```bash
-qsub 01_example.sh
+qsub -A <project-name> 01_example.sh
 ```
 
 The output should look like this in the `logs/<jobID>.<hostname>.OU` file:
@@ -316,7 +314,7 @@ On Polaris, when you login there is a module for MPI already loaded, named `cray
 ```bash
 module load cudatoolkit-standalone
 # need to pass `nvcc` the include path, library path, and library names to link against for MPI
-nvcc  -arch=sm_80 -I$MPICH_DIR/include -L$MPICH_DIR/lib -lmpi 01_example_mpi.cu -o 01_example_mpi
+CC 01_example_mpi.cu -o 01_example_mpi
 ```
 
 
@@ -333,8 +331,6 @@ Next this bash script can be used to submit a 2 node job with 8 ranks, 4 per nod
 #PBS -A datascience
 #PBS -o logs/
 #PBS -e logs/
-
-module load cudatoolkit-standalone/11.8.0
 
 # Count number of nodes assigned
 NNODES=`wc -l < $PBS_NODEFILE`
