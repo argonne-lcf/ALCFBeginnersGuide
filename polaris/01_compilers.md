@@ -34,12 +34,6 @@ __NOTE:__ that this only uses the CPU. CUDA is required to use the GPU.
 
 # Compiling C/C++ with CUDA
 
-In order to compile a C/C++ program with CUDA, you might load the latest CUDA toolkit and GCC modules.
-```bash
-module load cudatoolkit-standalone/11.8.0
-```
-This will add the path to these software to your `PATH` and `LD_LIBRARY_PATH` environment variables. Next an example CUDA program to do matrix multiplication on the GPU is compiled.
-
 ### Example code: [`01_example.cu`](examples/01_example.cu)
 ```c++
 #include <iostream>
