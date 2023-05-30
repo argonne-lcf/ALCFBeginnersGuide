@@ -2,6 +2,16 @@
 
 Polaris is the first machine at ALCF to use the PBS scheduler. PBS is a third party product that comes with [extensive documentation](https://help.altair.com/2022.1.0/PBS%20Professional/PBSUserGuide2022.1.pdf). This is an introduction, not an extensive tutorial so we will only cover some basics.
 
+### User is assumed to know:
+* schedulers are used to execute tasks on a cluster/supercomputer
+* a job defines how to run a program/task
+* a job defines how many compute nodes are needed and for how long
+### Learning Goals:
+* Run an interactive job
+* Submit a job
+* Monitoring a job
+* Remove a job
+
 ## What is a scheduler
 
 A _scheduler_ is used to fairly run applications on a large number of computers that are shared by many users. The user installs their software and data in a space accessible by the worker nodes, then creates a script (BASH or otherwise) that goes through the motions of running the application. Based on the user's needs, they submit a _job_ to the _scheduler_ that defines the number of compute nodes needed and the length of time the job should run for, also called _wall-time_. Given this information, the schduler pieces together all jobs in an efficient and fair way to run them all.
