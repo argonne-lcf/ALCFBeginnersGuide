@@ -6,6 +6,13 @@ The NVIDIA Nsight Compute is an interactive kernel profiler for CUDA application
 
 In addition, the baseline feature of this tool allows users to compare results within the tool. NVIDIA Nsight Compute provides a customizable and data-driven user interface, metric collection, and can be extended with analysis scripts for post-processing results.
 
+### Users are assumed to know:
+* basic usage of NVidia NSight System and Compute profilers
+### Learning Goals:
+* How to run NVidia profilers on Polaris
+* Installing NVidia profilers on your local machine
+* Viewing results produced on Polaris on your local machine
+
 
 ## Step-by-step guide
 
