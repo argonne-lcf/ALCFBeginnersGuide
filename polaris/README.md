@@ -6,6 +6,8 @@ This guide aims to introduce researchers with coding experience on clusters and/
 * basic linux terminal usage
 * basic cluster scheduling
 * basic code compilation
+### Learning Goals:
+* Use `module` command to inspect and modify the shell environment
 
 
 ## [Polaris](https://www.alcf.anl.gov/polaris)
