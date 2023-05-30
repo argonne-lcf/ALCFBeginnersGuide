@@ -2,6 +2,15 @@
 
 This section describes how to compile C/C++ code standalone, with CUDA, and with MPI. Specifically it introduces the Cray/HPE environment for compiling system compatible codes. 
 
+### User is assumed to know:
+* how to compile and run code
+* basic familiarity with CUDA and MPI
+### Learning Goals:
+* HPE (formerly Cray) provides custom wrappers for C/C++/FORTRAN compilers
+* How to compile a C++ code
+* How to compile a C++ code with CUDA and/or MPI
+* Modifications to job submission script when using MPI
+
 # Compiling C/C++ code
 
 When you first login to Polaris, there will be a default list of loaded modules (see them with `module list`). This includes the Cray/HPE build environment. The Cray/HPE build system utilizes compiler wrappers:
