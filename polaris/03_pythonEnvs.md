@@ -1,5 +1,13 @@
 # Python Environments
 
+### Users are assumed to know:
+* how to use Python
+* basic Conda usage
+### Learning Goals:
+* Loading a Conda module on Polaris
+* Create a custom build environment based on a Conda module
+
+
 <details closed><summary><b>ℹ️ Note: Job Setup</b></summary>
 <p>
   
