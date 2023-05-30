@@ -1,6 +1,11 @@
 # Polaris Beginners Guide
 
-This guide will teach the basics of how to utilize Polaris to achieve your scientific goals. 
+This guide aims to introduce researchers with coding experience on clusters and/or supercomputers to the specifics of using ALCF systems.
+
+### Users of this guide are assumed to know:
+* basic linux terminal usage
+* basic cluster scheduling
+* basic code compilation
 
 
 ## [Polaris](https://www.alcf.anl.gov/polaris)
