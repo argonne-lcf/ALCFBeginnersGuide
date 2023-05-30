@@ -1,5 +1,14 @@
 # Jupyter at ALCF
 
+### Users are assumed to know:
+* basic Jupyter Notebook usage
+* basic batch scheduler usage on a cluster/supercomputer
+### Learning Goals:
+* Login to ALCF Jupyter no Polaris
+* Submit a job via the Jupyter interface
+* Adding a Conda environment to your Jupyter kernel list
+
+
 JupyterHub is an open-source application to allow multiple users to launch
 Jupyter Notebooks from a central location.
 
