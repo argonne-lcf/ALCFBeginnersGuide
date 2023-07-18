@@ -122,3 +122,5 @@ conda activate /path/to/envs/base-clone
     inside a clone of the base environment.
 [^conda1]:
     You can get a list of all available `conda` modules with `module avail conda`.
+
+# [NEXT ->](04_jupyterNotebooks.md)
