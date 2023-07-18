@@ -1,6 +1,6 @@
 # Using the Polaris Job Scheduler: PBS
 
-Polaris is the first machine at ALCF to use the PBS scheduler. PBS is a third party product that comes with [extensive documentation](https://help.altair.com/2022.1.0/PBS%20Professional/PBSUserGuide2022.1.pdf). This is an introduction, not an extensive tutorial so we will only cover some basics.
+Polaris is the first machine at ALCF to use the PBS scheduler. Here is our documentation for [PBS on Polaris](https://docs.alcf.anl.gov/running-jobs/job-and-queue-scheduling/). PBS is a third party product that comes with [extensive documentation](https://help.altair.com/2022.1.0/PBS%20Professional/PBSUserGuide2022.1.pdf). This is an introduction, not an extensive tutorial so we will only cover some basics.
 
 ### User is assumed to know:
 * schedulers are used to execute tasks on a cluster/supercomputer
