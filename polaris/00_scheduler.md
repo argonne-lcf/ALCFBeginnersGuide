@@ -30,7 +30,7 @@ Here are the command breakdown:
 * `-l select=1` means we want one compute node for this job
 * `-l walltime=00:30:00` means we want our one node for 30 minutes (format = "HOURS:MINUTES:SECONDS")
 * `-q debug` tells the scheduler which _queue_ we would like to use
-* `-l filesystems=home` tells the scheduler that we require our home directory for this job. You can also specify `filesystems=home:eagle` if you also need access to `/eagle/<project-name>/` or `filesytems=home:grand` for `/grand/<project-name>/`.
+* `-l filesystems=home` tells the scheduler that we require our home directory for this job. You can also specify `filesystems=home:eagle` if you also need access to `/lus/eagle/<project-name>/`.
 * `-A <project-name>` specifies the project to which this job will be charged
 
 After your job begins, you will be running a shell on a worker node. The environment can be setup using `module` and some things are already loaded, including some NVidia tools like `nvidia-smi`.

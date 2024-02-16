@@ -70,7 +70,7 @@ We provide a sample configuration below:
 ```json
 {
  "argv": [
-  "/lus/grand/projects/datascience/foremans/locations/polaris/projects/saforem2/Megatron-DeepSpeed/venvs/polaris/2023-01-10/bin/python3",
+  "/lus/eagle/projects/datascience/foremans/locations/polaris/projects/saforem2/Megatron-DeepSpeed/venvs/polaris/2023-01-10/bin/python3",
   "-m",
   "ipykernel_launcher",
   "-f",
@@ -82,7 +82,7 @@ We provide a sample configuration below:
   "debugger": true
  },
  "env": {
-  "PATH": "/lus/grand/projects/datascience/foremans/locations/polaris/projects/saforem2/Megatron-DeepSpeed/venvs/polaris/2023-01-10/bin:/soft/datascience/conda/2023-01-10/mconda3/bin:/soft/datascience/conda/2023-01-10/mconda3/condabin:/soft/compilers/cudatoolkit/cuda-11.8.0/bin:/soft/libraries/nccl/nccl_2.16.2-1+cuda11.8_x86_64/include:/opt/cray/pe/hdf5-parallel/1.12.1.3/bin:/opt/cray/pe/hdf5/1.12.1.3/bin:/opt/cray/pe/pals/1.1.7/bin:/opt/cray/pe/craype/2.7.15/bin:/opt/cray/pe/gcc/11.2.0/bin:/home/foremans/.local/state/fnm_multishells/32267_1680009995525/bin:/home/foremans/.local/state/fnm_multishells/32263_1680009995495/bin:/home/foremans/.fnm:/home/foremans/.linuxbrew/Homebrew/bin:/home/foremans/.linuxbrew/opt/glibc/sbin:/home/foremans/.linuxbrew/opt/glibc/bin:/opt/cray/pe/perftools/22.05.0/bin:/opt/cray/pe/papi/6.0.0.14/bin:/opt/cray/libfabric/1.11.0.4.125/bin:/opt/clmgr/sbin:/opt/clmgr/bin:/opt/sgi/sbin:/opt/sgi/bin:/home/foremans/bin:/usr/local/bin:/usr/bin:/bin:/opt/c3/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/pbs/bin:/sbin:/home/foremans/.linuxbrew/bin:/home/foremans/.linuxbrew/sbin:/home/foremans/.cargo/bin:/home/foremans/.local/bin:/home/foremans/.fzf/bin:/opt/cray/pe/bin",
+  "PATH": "/lus/eagle/projects/datascience/foremans/locations/polaris/projects/saforem2/Megatron-DeepSpeed/venvs/polaris/2023-01-10/bin:/soft/datascience/conda/2023-01-10/mconda3/bin:/soft/datascience/conda/2023-01-10/mconda3/condabin:/soft/compilers/cudatoolkit/cuda-11.8.0/bin:/soft/libraries/nccl/nccl_2.16.2-1+cuda11.8_x86_64/include:/opt/cray/pe/hdf5-parallel/1.12.1.3/bin:/opt/cray/pe/hdf5/1.12.1.3/bin:/opt/cray/pe/pals/1.1.7/bin:/opt/cray/pe/craype/2.7.15/bin:/opt/cray/pe/gcc/11.2.0/bin:/home/foremans/.local/state/fnm_multishells/32267_1680009995525/bin:/home/foremans/.local/state/fnm_multishells/32263_1680009995495/bin:/home/foremans/.fnm:/home/foremans/.linuxbrew/Homebrew/bin:/home/foremans/.linuxbrew/opt/glibc/sbin:/home/foremans/.linuxbrew/opt/glibc/bin:/opt/cray/pe/perftools/22.05.0/bin:/opt/cray/pe/papi/6.0.0.14/bin:/opt/cray/libfabric/1.11.0.4.125/bin:/opt/clmgr/sbin:/opt/clmgr/bin:/opt/sgi/sbin:/opt/sgi/bin:/home/foremans/bin:/usr/local/bin:/usr/bin:/bin:/opt/c3/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/pbs/bin:/sbin:/home/foremans/.linuxbrew/bin:/home/foremans/.linuxbrew/sbin:/home/foremans/.cargo/bin:/home/foremans/.local/bin:/home/foremans/.fzf/bin:/opt/cray/pe/bin",
   "LD_LIBRARY_PATH": "/soft/compilers/cudatoolkit/cuda-11.8.0/extras/CUPTI/lib64:/soft/compilers/cudatoolkit/cuda-11.8.0/lib64:/soft/libraries/trt/TensorRT-8.5.2.2.Linux.x86_64-gnu.cuda-11.8.cudnn8.6/lib:/soft/libraries/nccl/nccl_2.16.2-1+cuda11.8_x86_64/lib:/soft/libraries/cudnn/cudnn-11-linux-x64-v8.6.0.163/lib:/opt/cray/pe/gcc/11.2.0/snos/lib64:/opt/cray/pe/papi/6.0.0.14/lib64:/opt/cray/libfabric/1.11.0.4.125/lib64",
   "MPICH_GPU_SUPPORT_ENABLED": "1",
   "CONDA_PREFIX": "/soft/datascience/conda/2023-01-10/mconda3"
@@ -116,7 +116,7 @@ From Terminal
 ```Shell
 # from terminal
 cd ~
-ln -s /grand/projects/ABC ABC_project
+ln -s /lus/eagle/projects/ABC ABC_project
 ```
 </p>
 </details>
@@ -131,7 +131,7 @@ From Notebook
 
 ```Shell
 # from notebook
-!ln -s /grand/projects/ABC ABC_project
+!ln -s /lus/eagle/projects/ABC ABC_project
 ```
 </p>
 </details>

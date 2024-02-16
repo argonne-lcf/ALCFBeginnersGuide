@@ -33,7 +33,7 @@
 > ```
 > would be replaced by
 > ```Shell
-> /lus/grand/projects/datascience/foremans/miniconda3/envs/
+> /lus/eagle/projects/datascience/foremans/miniconda3/envs/
 > ```
 
 </p>
@@ -106,7 +106,7 @@ conda activate /path/to/envs/base-clone
 > outside of your `$HOME` directory, if possible.
 >
 > For example,
-> `mkdir -p "/grand/<project>/${USER}/miniconda3/envs"`
+> `mkdir -p "/lus/eagle/<project>/${USER}/miniconda3/envs"`
 
 
 ## Additional Resources

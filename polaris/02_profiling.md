@@ -19,7 +19,7 @@ In addition, the baseline feature of this tool allows users to compare results w
 ### Common part on Polaris
 Build your application for Polaris, and then submit your job script to Polaris or start an interactive job mode on Polaris as follows:  
 ```
-$ qsub -I -l select=1 -l walltime=1:00:00 -l filesystems=home:grand -q debug -A <project-name>
+$ qsub -I -l select=1 -l walltime=1:00:00 -l filesystems=home:eagle -q debug -A <project-name>
 
 $ module load cudatoolkit-standalone/11.8.0 
 $ module li
@@ -80,7 +80,7 @@ $ ncu --help
 ![Build_an_example](media/02_terminal_01.gif)
 
 ```
-jkwack@polaris-login-04:~> qsub -I -l walltime=1:00:00 -l filesystems=home:grand -q debug -A Performance
+jkwack@polaris-login-04:~> qsub -I -l walltime=1:00:00 -l filesystems=home:eagle -q debug -A Performance
 qsub: waiting for job 443287.polaris-pbs-01.hsn.cm.polaris.alcf.anl.gov to start
 qsub: job 443287.polaris-pbs-01.hsn.cm.polaris.alcf.anl.gov ready
 
