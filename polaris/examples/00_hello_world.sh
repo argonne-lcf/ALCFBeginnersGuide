@@ -4,8 +4,8 @@
 #PBS -q debug
 #PBS -l filesystems=home
 #PBS -A <project-name>
-#PBS -o logs/
-#PBS -e logs/
+#PBS -o <your_log_dir>
+#PBS -e <your_log_dir>
 
 module load gcc/11.2.0
 

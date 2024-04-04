@@ -4,8 +4,8 @@
 #PBS -q debug
 #PBS -l filesystems=home
 #PBS -A <project-name>
-#PBS -o logs/
-#PBS -e logs/
+#PBS -o <your_log_dir>
+#PBS -e <your_log_dir>
 
 # Count number of nodes assigned
 NNODES=`wc -l < $PBS_NODEFILE`
