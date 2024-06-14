@@ -11,8 +11,7 @@ If you are new to using supercomputers and/or ALCF systems, this is the starting
 We have versions of these steps laid out for each of our systems so please pick the system you wish to begin with and start there:
 
 * [Polaris](polaris/)
-* [Theta](theta/)
-* [Cooley](cooley/)
+
 
 # Our Assumptions
 
