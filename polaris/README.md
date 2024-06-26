@@ -66,6 +66,10 @@ ALCF uses [Environment Modules](https://modules.readthedocs.io/en/latest/index.h
 module list
 # list all available modules
 module avail
+# add '/soft/modulefiles' to the path for modules to search
+module use /soft/modulefiles
+# now see additional software available
+module avail
 # list all available modules including the string "gcc"
 module avail gcc
 # show information about a module and lists commands that alter environment
