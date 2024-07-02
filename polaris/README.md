@@ -41,10 +41,10 @@ You will be prompted for your password, which is a six digit code generated uniq
 
 ## Quick filesystem breakdown
 
-When you login, you start in your _home_ directory: `/home/<username>/` (100GB quota)
-As an ALCF user you will be assigned access to different allocation _projects_. You can see your projects listed on the [ALCF Accounts Page](accounts.alcf.anl.gov). Each project maps to a user group to control filesystem access, so you can also check your projects using the `groups` command on the terminal. Projects are given storage spaces on our Eagle and/or Grand Lustre filesystems where all members of the project can read/write and share data/software:
-* `/eagle/<project-name>`
-* `/grand/<project-name>`
+When you login, you start in your _home_ directory: `/home/<username>/` (1TB default starting quota)
+As an ALCF user you will be assigned access to different allocation _projects_. You can see your projects listed on the [ALCF Accounts Page](accounts.alcf.anl.gov). Each project maps to a user group to control filesystem access, so you can also check your projects using the `groups` command on the terminal. Projects are given storage spaces on our Eagle and/or eagle Lustre filesystems where all members of the project can read/write and share data/software:
+* `/lus/eagle/projects/<project-name>`
+* `/lus/eagle/projects/<project-name>`
 Users should use project spaces for large scale storage and software installations. Increases can be requested via `support@alcf.anl.gov`.
 
 ## Clone repo:
