@@ -28,18 +28,20 @@ Here are the command breakdown:
 * `qsub` is the command to submit jobs to the scheduler
 * `-I` means submit an _interactive_ job
 * `-l select=1` means we want one compute node for this job
-* `-l walltime=00:30:00` means we want our one node for 30 minutes (format = "HOURS:MINUTES:SECONDS")
+* `-l walltime=00:30:00` means we want our one node for 30 minutes (format = "HOURS:MINUTES:SECONDS" or "DAYS:HOURS:MINUTES:SECONDS")
 * `-q debug` tells the scheduler which _queue_ we would like to use
 * `-l filesystems=home` tells the scheduler that we require our home directory for this job. You can also specify `filesystems=home:eagle` if you also need access to `/lus/eagle/<project-name>/`.
 * `-A <project-name>` specifies the project to which this job will be charged
 
-After your job begins, you will be running a shell on a worker node. The environment can be setup using `module` and some things are already loaded, including some NVidia tools like `nvidia-smi`.
+After your job begins, you will be running a shell on a worker node. The environment can be setup using `module` and some things are already loaded, including some NVidia tools like `nvidia-smi`. You can also open another shell and use `ssh` to login to the node on which were allocated if you need another command line to help debug.
+
+Once the walltime has been reached, your shells will automatically logout from the worker node(s).
 
 ![polaris_interactive](media/polaris_qsub_interactive.gif)
 
 ## Submit your first job
 
-The more standard method for running a job is to submit it to the scheduler via `qsub` with a script that will execute your job. Let's walk through an example.
+The more standard method for running a job is to submit it to the scheduler via `qsub` with a script that will execute your job without you needing to login to the worker nodes. Let's walk through an example.
 
 First we need to create a job script (example: [examples/00_hello_world.sh](examples/00_hello_world.sh)):
 ```bash
@@ -64,9 +66,9 @@ You'll notice we can use the `#PBS` line prefix at the top of our script to set 
 
 > NOTE: here we used `-o logs/` and `-e logs/` which just redirects the STDOUT(`-o`) and the STDERR(`-e`) log files from the job into the `logs/` directory to keep things tidy.
 
-> NOTE: Job scripts must be executable so we need to run `chmod a+x job_script.sh`.
+> NOTE: Job scripts must be executable so we need to run `chmod a+x job_script.sh`. This also requires a proper [shebang](https://linuxize.com/post/bash-shebang/) to be set on the first line of our script, e.g. `#!/bin/bash`.
 
-Now submit our job (don't forget to change `<project-name>`):
+Now submit the job (don't forget to change `<project-name>` in the script):
 ```bash
 qsub job_script.sh
 ```
@@ -77,7 +79,7 @@ We can check our job's status using this command:
 ```bash
 qstat -u <username>
 ```
-without specifying the `username` we will get a full printout of every job queued and running. This can be overwhelming so using the `username` reduces the output to jobs for just that `username`.
+without specifying the `username` we will get a full print out of every job queued and running. This can be overwhelming so using the `username` reduces the output to jobs for just that `username`. Adding `alias qsme='qstat -u <username>'` to your `.bashrc` is a nice shortcut.
 
 ![polaris_hello_world](media/polaris_qsub_hello_world.gif)
 
