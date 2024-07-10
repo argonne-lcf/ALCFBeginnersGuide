@@ -53,7 +53,12 @@ We provide pre-built `conda` environments, ready-to-go with your all[^all] your 
 To load and activate the default[^versions] `conda` environment[^conda1], simply:
 
 ```Shell
-module load conda ; conda activate base
+# first tell modules where to find conda
+module use /soft/modulefiles
+# load conda into your environment
+module load conda
+# activate the `base` conda environment
+conda activate base
 ```
 
 If you need to install additional packages, there are two approaches:

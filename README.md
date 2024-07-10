@@ -22,6 +22,11 @@ These guides presume the reader knows:
 * how to navigate a linux terminal and shell environment. Your default login shell (BASH, ZSH, etc.) can be selected via [ALCF Accounts Page](accounts.alcf.anl.gov).
 * how to compile software in a linux environment using `gcc`/`g++`/`clang++`.
 
+# ALCF Systems Overview
+
+![ALCFSystems](media/alcf_system_overview.png)
+
+
 # What is a Supercomputer?
 
 Argonne hosts DOE supercomputers for use by research scientists in need of large computational resources. Supercomputers are composed of many computing _nodes_ (1 _node_ = 1 physical computer) that are connected by a high-speed communications network so that groups of nodes can share information quickly, effectively operating together as a larger computer.
