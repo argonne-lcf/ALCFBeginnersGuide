@@ -9,42 +9,37 @@
 * Adding a Conda environment to your Jupyter kernel list
 
 
-JupyterHub is an open-source application to allow multiple users to launch
-Jupyter Notebooks from a central location.
+JupyterHub is an open-source application to allow multiple users to launch Jupyter Notebooks from a central location. 
 
-At ALCF, users can use the JupyterHub instances at
-[https://jupyter.alcf.anl.gov](https://jupyter.alcf.anl.gov) to run notebooks
-directly on the compute resource of their choice[^docs].
+[Link to Full Docs](https://docs.alcf.anl.gov/services/jupyter-hub/)
 
-To login, use your
-[Passcode Token](https://docs.alcf.anl.gov/account-project-management/accounts-and-access/alcf-passcode-tokens/), 
-exactly the same as you would to login to Polaris directly.
+### Quick Description of the Process:
+1. At ALCF, users can use the JupyterHub instances at [https://jupyter.alcf.anl.gov](https://jupyter.alcf.anl.gov).
+2. Select which machine on which to launch a notebook server.
+3. Login using your [Passcode Token](https://docs.alcf.anl.gov/account-project-management/accounts-and-access/alcf-passcode-tokens/), exactly the same as you would to login to an ALCF machine via ssh.
+3. Select parameters for the job that will be submitted to the queue. You are defining the parameters for `qstat` at this stage.
+    * Select a job profile: This field lists the current available Profiles "Polaris Compute Node", etc.
+    * Queue Name: This field provides a list of available queues on the system
+    * Project List: This field displays the list of active projects associated with the user on the given system
+    * Number Chunks: This field allows the user to select the number of compute nodes to be allocated for the job
+    * Runtime (minutes:seconds): This field allows the user to set the runtime of the job in minutes and seconds.
+    * File Systems: This field allows the user to select which file systems are required.
+4. Wait for the job to start. There is a 5 minute timeout set, after which the service removes your job from the queue, and you must resubmit. We are working on improving this behavior.
+5. When your server starts, navigate to your working folder, then start a new notebook using a kernel.
+
+### Visual of the process:
 
 ![jup_login](media/04_jupyter_login.gif)
 
-
-We support and maintain a web interface to the [Jupyter Instances at
-ALCF](https://jupyter.alcf.anl.gov/) that can be used to run Jupyter notebooks
-on all of our major systems.
-
 ## Customize Environment
 
-ALCF provides a simple Python environment to start.
-Users can customize their environment to meet their needs by creating a virtual
-python environment and defining new kernels.
+ALCF provides a simple Python3 environment, and our default `conda` module as well. The later is most likely what everyone should use, as the Python3 environment has nothing installed. Users can add kernels that employ their environment to meet their needs. See [03_pythonEnvs](./03_pythonEnvs.md) for how to make custom environments.
 
-As covered in [03_pythonEnvs](./03_pythonEnvs.md), we recommend using 
-virtual environments built on top of our `conda` environments.
+With your custom environment loaded you can run the command below, with properly titled `<kernel-display-name>` and `<kernel-name>` it will generate a new kernel configuration in the path `~/.local/share/jupyter/kernels/<kernel-name>/` which will contain the `kernel.json` configuration file.
 
-We provide below an example of how to set up Jupyter to run with your custom python `venv`.
-
-From a terminal:
-
+From a terminal run:
 ```Shell
-module load conda ; conda activate base
-# source /poth/to/your/venv/bin/activate
-# conda activate your_conda_env
-# set shell proxy variables to access external URL
+# Run with environment setup for your target Python Kernel
 python3 -m ipykernel install \
     --user \
     --name=<kernel-name> \
@@ -53,117 +48,54 @@ python3 -m ipykernel install \
     --env LD_LIBRARY_PATH "${LD_LIBRARY_PATH}" \
     --env MPICH_GPU_SUPPORT_ENABLED "${MPICH_GPU_SUPPORT_ENABLED}" \
     --env CONDA_PREFIX "${CONDA_PREFIX}"
-# Installed kernelspec <kernel-name> in /path/to/venv/share/jupyter/kernels/<kernel-name>
-
 ```
 
-<!--Currently, Polaris compute nodes access the internet through a proxy.
-
-To configure the kernel to use the proxy, add variables `http_proxy`, and
-`https_proxy` to the `env` section.
-
-This will allow users to install packages from the notebook using `!conda`
-magic commands.-->
-
-We provide a sample configuration below:
+This will create a `kernel.json` file in `~/.local/share/jupyter/kernels/<kernel-name>/`. Here is an example for the default `conda` environment:
 
 ```json
 {
  "argv": [
-  "/lus/eagle/projects/datascience/foremans/locations/polaris/projects/saforem2/Megatron-DeepSpeed/venvs/polaris/2023-01-10/bin/python3",
+  "/soft/applications/conda/2024-04-29/mconda3/bin/python3",
+  "-Xfrozen_modules=off",
   "-m",
   "ipykernel_launcher",
   "-f",
   "{connection_file}"
  ],
- "display_name": "[Polaris:2023-01-10] MegatronDeepSpeed",
+ "display_name": "mycondatest",
  "language": "python",
  "metadata": {
   "debugger": true
  },
  "env": {
-  "PATH": "/lus/eagle/projects/datascience/foremans/locations/polaris/projects/saforem2/Megatron-DeepSpeed/venvs/polaris/2023-01-10/bin:/soft/datascience/conda/2023-01-10/mconda3/bin:/soft/datascience/conda/2023-01-10/mconda3/condabin:/soft/compilers/cudatoolkit/cuda-11.8.0/bin:/soft/libraries/nccl/nccl_2.16.2-1+cuda11.8_x86_64/include:/opt/cray/pe/hdf5-parallel/1.12.1.3/bin:/opt/cray/pe/hdf5/1.12.1.3/bin:/opt/cray/pe/pals/1.1.7/bin:/opt/cray/pe/craype/2.7.15/bin:/opt/cray/pe/gcc/11.2.0/bin:/home/foremans/.local/state/fnm_multishells/32267_1680009995525/bin:/home/foremans/.local/state/fnm_multishells/32263_1680009995495/bin:/home/foremans/.fnm:/home/foremans/.linuxbrew/Homebrew/bin:/home/foremans/.linuxbrew/opt/glibc/sbin:/home/foremans/.linuxbrew/opt/glibc/bin:/opt/cray/pe/perftools/22.05.0/bin:/opt/cray/pe/papi/6.0.0.14/bin:/opt/cray/libfabric/1.11.0.4.125/bin:/opt/clmgr/sbin:/opt/clmgr/bin:/opt/sgi/sbin:/opt/sgi/bin:/home/foremans/bin:/usr/local/bin:/usr/bin:/bin:/opt/c3/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/pbs/bin:/sbin:/home/foremans/.linuxbrew/bin:/home/foremans/.linuxbrew/sbin:/home/foremans/.cargo/bin:/home/foremans/.local/bin:/home/foremans/.fzf/bin:/opt/cray/pe/bin",
-  "LD_LIBRARY_PATH": "/soft/compilers/cudatoolkit/cuda-11.8.0/extras/CUPTI/lib64:/soft/compilers/cudatoolkit/cuda-11.8.0/lib64:/soft/libraries/trt/TensorRT-8.5.2.2.Linux.x86_64-gnu.cuda-11.8.cudnn8.6/lib:/soft/libraries/nccl/nccl_2.16.2-1+cuda11.8_x86_64/lib:/soft/libraries/cudnn/cudnn-11-linux-x64-v8.6.0.163/lib:/opt/cray/pe/gcc/11.2.0/snos/lib64:/opt/cray/pe/papi/6.0.0.14/lib64:/opt/cray/libfabric/1.11.0.4.125/lib64",
+  "PATH": "/soft/applications/conda/2024-04-29/mconda3/bin:/soft/applications/conda/2024-04-29/mconda3/condabin:/soft/compilers/cudatoolkit/cuda-12.4.1/bin:/soft/libraries/nccl/nccl_2.21.5-1+cuda12.4_x86_64/include:/opt/cray/pe/hdf5-parallel/1.12.2.9/bin:/opt/cray/pe/hdf5/1.12.2.9/bin:/opt/cray/pals/1.3.4/bin:/opt/cray/pe/mpich/8.1.28/ofi/gnu/12.3/bin:/opt/cray/pe/mpich/8.1.28/bin:/opt/cray/pe/craype/2.7.30/bin:/home/parton/.vscode-server/cli/servers/Stable-ea1445cc7016315d0f5728f8e8b12a45dc0a7286/server/bin/remote-cli:/soft/perftools/darshan/darshan-3.4.4/bin:/opt/cray/pe/perftools/23.12.0/bin:/opt/cray/pe/papi/7.0.1.2/bin:/opt/cray/libfabric/1.15.2.0/bin:/opt/clmgr/sbin:/opt/clmgr/bin:/opt/sgi/sbin:/opt/sgi/bin:/home/parton/.local/bin:/usr/local/bin:/usr/bin:/bin:/opt/c3/bin:/dbhome/db2cat/sqllib/bin:/dbhome/db2cat/sqllib/adm:/dbhome/db2cat/sqllib/misc:/dbhome/db2cat/sqllib/gskit/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/pbs/bin:/sbin:/opt/cray/pe/bin",
+  "LD_LIBRARY_PATH": "/soft/compilers/cudatoolkit/cuda-12.4.1/extras/CUPTI/lib64:/soft/compilers/cudatoolkit/cuda-12.4.1/lib64:/soft/libraries/trt/TensorRT-8.6.1.6.Linux.x86_64-gnu.cuda-12.0/lib:/soft/libraries/nccl/nccl_2.21.5-1+cuda12.4_x86_64/lib:/soft/libraries/cudnn/cudnn-cuda12-linux-x64-v9.1.0.70/lib:/soft/perftools/darshan/darshan-3.4.4/lib:/opt/cray/pe/papi/7.0.1.2/lib64:/opt/cray/libfabric/1.15.2.0/lib64:/dbhome/db2cat/sqllib/lib64:/dbhome/db2cat/sqllib/lib64/gskit:/dbhome/db2cat/sqllib/lib32",
   "MPICH_GPU_SUPPORT_ENABLED": "1",
-  "CONDA_PREFIX": "/soft/datascience/conda/2023-01-10/mconda3"
+  "CONDA_PREFIX": "/soft/applications/conda/2024-04-29/mconda3"
  }
-}
 ```
 
-after completing these steps, you should see `<kernel-name>` kernel when you click
-new on the Jupyter Hub home page or when you use Kernel menu in a Jupyter
-notebook.
+after completing these steps, you should see `<kernel-name>` kernel when you click new on the Jupyter Hub home page or when you use Kernel menu in a Jupyter notebook. Note: kernels are loaded by Jupyter during server start, not while the server is running. A stop/restart will be required if the kernel was installed while the server is running.
 
 ## Accessing Project Folders
 
-From within the JupyterHub file browser, users are limited to viewing files
-within their home directory.
+From within the JupyterHub file browser, users are limited to viewing files within their home directory.
 
-To access project directories located outside of your `$HOME`, a symbolic link
-to the directory must be created.
+To access project directories located outside of your `$HOME`, a symbolic link to the directory must be created.
 
-Explicitly, if a user wants to access project `ABC`, we can create a symbolic
-link by
+Explicitly, if a user wants to access project `ABC`, we can create a symbolic link in the terminal or via Juptyer:
 
-<details open>
-<summary>
-<b>
-From Terminal
-</b>
-</summary>
-<p>
- 
+
 ```Shell
 # from terminal
 cd ~
 ln -s /lus/eagle/projects/ABC ABC_project
 ```
-</p>
-</details>
-
-<details closed>
-<summary>
-<b>
-From Notebook
-</b>
-</summary>
-<p>
 
 ```Shell
-# from notebook
+# in notebook using `!` escape
 !ln -s /lus/eagle/projects/ABC ABC_project
 ```
-</p>
-</details>
-
-## Running Notebook on a Compute Node
-
-The ThetaGPU and Polaris instances of JupyterHub allow users to start Jupyter
-Notebooks directly on compute nodes through the given job scheduler.
-
-The job will be executed according to ALCF's queue and scheduling policy[^timeout]
-
-## Polaris
-
-The Polaris JupyterHub instance does not have a "Local Host Process" option.
-
-All jupyter notebooks are run on a compute node through the job scheduler.
-
-When the user authenticates the user will be presented with a "Start My Server"
-button that once clicked, will present the user with the available job options
-needed to start the notebook.
-
-- Options:
-  - Select a job profile: This field lists the current available Profiles
-    "Polaris Compute Node", etc.
-  - Queue Name: This field provides a list of available queues on the system
-  - Project List: This field displays the list of active projects associated
-    with the user on the given system
-  - Number Chunks: This field allows the user to select the number of compute nodes to be allocated for the job
-  - Runtime (minutes:seconds): This field allows the user to set the runtime of the job in minutes and seconds.
-  - File Systems: This field allows the user to select which file systems are required.
 
 
-[^docs]: Additional information can be found in our [JupyterHub documentation](https://docs.alcf.anl.gov/services/jupyter-hub/)
-[^timeout]: Note: if the queued job does not start within 2 minutes, JupyterHub
-  will timeout and the job will be removed from the queue.
+
