@@ -35,7 +35,7 @@ JupyterHub is an open-source application to allow multiple users to launch Jupyt
 
 ALCF provides a simple Python3 environment, and our default `conda` module as well. The later is most likely what everyone should use, as the Python3 environment has nothing installed. Users can add kernels that employ their environment to meet their needs. See [03_pythonEnvs](./03_pythonEnvs.md) for how to make custom environments.
 
-With your custom environment loaded you can run the command below, with properly titled `<kernel-display-name>` and `<kernel-name>` it will generate a new kernel configuration in the path `~/.local/share/jupyter/kernels/<kernel-name>/` which will contain the `kernel.json` configuration file.
+With your custom environment loaded, you can run the command below with properly titled `<kernel-display-name>` and `<kernel-name>` to generate a new kernel configuration in the path `~/.local/share/jupyter/kernels/<kernel-name>/`. The configuration file is named `kernel.json`.
 
 From a terminal run:
 ```Shell
