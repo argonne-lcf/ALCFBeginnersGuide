@@ -10,8 +10,10 @@ If you are new to using supercomputers and/or ALCF systems, this is the starting
 
 We have versions of these steps laid out for each of our systems so please pick the system you wish to begin with and start there:
 
+* [Aurora](aurora/)
 * [Polaris](polaris/)
-
+* [Crux](crux/) [Coming Soon]
+* [Sophia](sophia/) [Coming Soon]
 
 # Our Assumptions
 
@@ -20,6 +22,11 @@ These guides presume the reader knows:
 * how to use SSH on their computer in order to remotely login to another machine. If you are not familiar with SSH please search for "how to use ssh on _linux or windows or mac_".
 * how to navigate a linux terminal and shell environment. Your default login shell (BASH, ZSH, etc.) can be selected via [ALCF Accounts Page](accounts.alcf.anl.gov).
 * how to compile software in a linux environment using `gcc`/`g++`/`clang++`.
+
+# ALCF Systems Overview
+
+![ALCFSystems](media/alcf_system_overview.png)
+
 
 # What is a Supercomputer?
 
@@ -48,3 +55,7 @@ Large computer systems typically have _worker_ nodes and _login_ nodes. _login_ 
 These supercomputers occupy a lot of space in the ACLF data center. Here is our staff at the time (2019) in front of [Mira](https://en.wikipedia.org/wiki/Mira_(supercomputer)), an IBM supercomputer, that debuted as the third fastest supercomputer in the world in 2012.
 
 ![Staff-Mira](media/mira_staff.jpg)
+
+And look how the team has grown, standing now in front of Aurora.
+
+![Staff-Aurora](media/aurora_staff.jpg)

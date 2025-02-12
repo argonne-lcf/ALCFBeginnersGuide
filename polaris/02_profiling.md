@@ -21,23 +21,23 @@ Build your application for Polaris, and then submit your job script to Polaris o
 ```
 $ qsub -I -l select=1 -l walltime=1:00:00 -l filesystems=home:eagle -q debug -A <project-name>
 
-$ module load cudatoolkit-standalone/11.8.0 
+$ module use /soft/modulefiles
+$ module load cudatoolkit-standalone/12.5.0 
 $ module li
 
 Currently Loaded Modules:
-  1) craype-x86-rome          6) craype/2.7.15        11) cray-pals/1.1.7
-  2) libfabric/1.11.0.4.125   7) cray-dsmml/0.2.2     12) cray-libpals/1.1.7
-  3) craype-network-ofi       8) cray-mpich/8.1.16    13) PrgEnv-nvhpc/8.3.3
-  4) perftools-base/22.05.0   9) cray-pmi/6.1.2       14) craype-accel-nvidia80
-  5) nvhpc/21.9              10) cray-pmi-lib/6.0.17  15) cudatoolkit-standalone/11.8.0
+  1) nvhpc/23.9          5) cray-pmi/6.1.13      9) PrgEnv-nvhpc/8.5.0      13) darshan/3.4.4
+  2) craype/2.7.30       6) cray-pals/1.3.4     10) libfabric/1.15.2.0      14) cudatoolkit-standalone/12.5.0
+  3) cray-dsmml/0.2.2    7) cray-libpals/1.3.4  11) craype-network-ofi
+  4) cray-mpich/8.1.28   8) craype-x86-milan    12) perftools-base/23.12.0
  
 $ nsys --version
-NVIDIA Nsight Systems version 2022.4.2.1-df9881f
+NVIDIA Nsight Systems version 2024.2.3.38-242334140272v0
 
 $ ncu --version
 NVIDIA (R) Nsight Compute Command Line Profiler
-Copyright (c) 2018-2022 NVIDIA Corporation
-Version 2022.3.0.0 (build 31729285) (public-release)
+Copyright (c) 2018-2024 NVIDIA Corporation
+Version 2024.2.0.0 (build 34181891) (public-release)
 ```
 
 
@@ -58,14 +58,14 @@ Remark: Without -o option, Nsight Compute provides performance data as a standar
 ### Post-processing the profiled data
 #### Post-processing via CLI
 ```
-$ nsys stats {output_filename}.qdrep
+$ nsys stats {output_filename}.nsys-rep
 $ ncu -i {output_filename}.ncu-rep  
 ```
 
 #### Post-processing on your local system via GUI
 * Install [NVIDIA Nsight Systems](https://developer.nvidia.com/nsight-systems) and [NVIDIA Nsight Compute](https://developer.nvidia.com/nsight-compute) after downloading both of them from the  NVIDIA Developer Zone.   
 Remark: Local client version should be the same as or newer than NVIDIA Nsight tools on Polaris. 
-* Download nsys output files (i.e., ending with .qdrep and . sqlite) to your local system, and then open them with NVIDIA Nsight Systems on your local system.  
+* Download nsys output files (i.e., ending with .nsys-rep and . sqlite) to your local system, and then open them with NVIDIA Nsight Systems on your local system.  
 * Download ncu output files (i.e., ending with .ncu-rep) to your local system, and then open them with NVIDIA Nsight Compute on your local system.  
 
 ### More options for performance analysis with Nsight Systems and Nsight Compute
@@ -80,31 +80,46 @@ $ ncu --help
 ![Build_an_example](media/02_terminal_01.gif)
 
 ```
-jkwack@polaris-login-04:~> qsub -I -l walltime=1:00:00 -l filesystems=home:eagle -q debug -A Performance
-qsub: waiting for job 443287.polaris-pbs-01.hsn.cm.polaris.alcf.anl.gov to start
-qsub: job 443287.polaris-pbs-01.hsn.cm.polaris.alcf.anl.gov ready
+jkwack@polaris-login-02:~> qsub -I -l select=1 -l walltime=01:00:00 -q debug -l filesystems=home:eagle -A Performance
+qsub: waiting for job 2022713.polaris-pbs-01.hsn.cm.polaris.alcf.anl.gov to start
+qsub: job 2022713.polaris-pbs-01.hsn.cm.polaris.alcf.anl.gov ready
 
-jkwack@x3004c0s31b1n0:~> module load cudatoolkit-standalone/11.8.0  cmake/3.23.2 
-----------------------------------------------------------------------------------
-     cmake 3.23.2 successfully loaded
-----------------------------------------------------------------------------------
-jkwack@x3004c0s31b1n0:~> module li
+jkwack@x3005c0s7b0n0:~> module use /soft/modulefiles
+jkwack@x3005c0s7b0n0:~> module load cudatoolkit-standalone/12.5.0 spack-pe-base cmake
+jkwack@x3005c0s7b0n0:~> module li
 
 Currently Loaded Modules:
-  1) craype-x86-rome          5) nvhpc/21.9          9) cray-pmi/6.1.2       13) PrgEnv-nvhpc/8.3.3
-  2) libfabric/1.11.0.4.125   6) craype/2.7.15      10) cray-pmi-lib/6.0.17  14) craype-accel-nvidia80
-  3) craype-network-ofi       7) cray-dsmml/0.2.2   11) cray-pals/1.1.7      15) cudatoolkit-standalone/11.8.0
-  4) perftools-base/22.05.0   8) cray-mpich/8.1.16  12) cray-libpals/1.1.7   16) cmake/3.23.2
+  1) nvhpc/23.9          6) cray-pals/1.3.4     11) craype-network-ofi             16) nghttp2/1.57.0-ciat5hu
+  2) craype/2.7.30       7) cray-libpals/1.3.4  12) perftools-base/23.12.0         17) curl/8.4.0-2ztev25
+  3) cray-dsmml/0.2.2    8) craype-x86-milan    13) darshan/3.4.4                  18) cmake/3.27.7
+  4) cray-mpich/8.1.28   9) PrgEnv-nvhpc/8.5.0  14) cudatoolkit-standalone/12.5.0
+  5) cray-pmi/6.1.13    10) libfabric/1.15.2.0  15) spack-pe-base/0.7.1
 
-jkwack@x3004c0s31b1n0:~> cd ALCFBeginnersGuide/polaris/examples/BabelStream/
+jkwack@x3005c0s7b0n0:~> cd ALCFBeginnersGuide/polaris/examples
+jkwack@x3005c0s7b0n0:~/ALCFBeginnersGuide/polaris/examples> git clone https://github.com/UoB-HPC/BabelStream.git
+Cloning into 'BabelStream'...
+remote: Enumerating objects: 4829, done.
+remote: Counting objects: 100% (1257/1257), done.
+remote: Compressing objects: 100% (303/303), done.
+remote: Total 4829 (delta 1071), reused 1044 (delta 953), pack-reused 3572
+Receiving objects: 100% (4829/4829), 2.44 MiB | 6.74 MiB/s, done.
+Resolving deltas: 100% (2953/2953), done.
 
-jkwack@x3004c0s31b1n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream> cmake -Bbuild_polaris -H. -DMODEL=cuda -DCMAKE_CUDA_COMPILER=nvcc -DCUDA_ARCH=sm_80 -DCXX_EXTRA_FLAGS="-DDEBUG"
--- The CXX compiler identification is NVHPC 21.9.0
+jkwack@x3005c0s7b0n0:~/ALCFBeginnersGuide/polaris/examples> cd BabelStream
+jkwack@x3005c0s7b0n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream> cmake -Bbuild_polaris -H. -DMODEL=cuda -DCMAKE_CUDA_COMPILER=nvcc -DCUDA_ARCH=sm_80 -DCXX_EXTRA_FLAGS="-DDEBUG"
+-- The CXX compiler identification is GNU 7.5.0
+-- The C compiler identification is GNU 7.5.0
 -- Detecting CXX compiler ABI info
 -- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: /opt/nvidia/hpc_sdk/Linux_x86_64/21.9/compilers/bin/nvc++ - skipped
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+No CMAKE_BUILD_TYPE specified, defaulting to 'Release'
 -- CXX_EXTRA_LINK_FLAGS: 
         Appends to link flags which appear *before* the objects.
         Do not use this for linking libraries, as the link line is order-dependent
@@ -113,7 +128,7 @@ jkwack@x3004c0s31b1n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream> cmake -
         Use this for linking extra libraries (e.g `-lmylib`, or simply `mylib`)
 -- CXX_EXTRA_LINKER_FLAGS: 
         Append to linker flags (i.e GCC's `-Wl` or equivalent)
--- Available models:  omp;ocl;std-data;std-indices;std-ranges;hip;cuda;kokkos;sycl;sycl2020;acc;raja;tbb;thrust
+-- Available models:  omp;ocl;std-data;std-indices;std-ranges;hip;cuda;kokkos;sycl;sycl2020-acc;sycl2020-usm;acc;raja;tbb;thrust;futhark
 -- Selected model  :  cuda
 -- Supported flags:
 
@@ -128,67 +143,78 @@ jkwack@x3004c0s31b1n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream> cmake -
 
 -- Model-specific flags for this build:
 
-   CMAKE_CXX_COMPILER = `/opt/nvidia/hpc_sdk/Linux_x86_64/21.9/compilers/bin/nvc++`
+   CMAKE_CXX_COMPILER = `/usr/bin/c++`
    MEM = `DEFAULT`
    CMAKE_CUDA_COMPILER = `nvcc`
    CUDA_ARCH = `sm_80`
    CUDA_EXTRA_FLAGS = ``
 
--- The CUDA compiler identification is NVIDIA 11.8.89
+CMake Deprecation Warning at src/cuda/model.cmake:28 (cmake_policy):
+  The OLD behavior for policy CMP0104 will be removed from a future version
+  of CMake.
+
+  The cmake-policies(7) manual explains that the OLD behaviors of all
+  policies are deprecated and that a policy should be set to OLD only under
+  specific short-term circumstances.  Projects should be ported to the NEW
+  behavior and not rely on setting a policy to OLD.
+Call Stack (most recent call first):
+  CMakeLists.txt:196 (setup)
+
+
+-- The CUDA compiler identification is NVIDIA 12.5.40
 -- Detecting CUDA compiler ABI info
 -- Detecting CUDA compiler ABI info - done
--- Check for working CUDA compiler: /soft/compilers/cudatoolkit/cuda-11.8.0/bin/nvcc - skipped
+-- Check for working CUDA compiler: /soft/compilers/cudatoolkit/cuda-12.5.0/bin/nvcc - skipped
 -- Detecting CUDA compile features
 -- Detecting CUDA compile features - done
 -- NVCC flags: -forward-unknown-to-host-compiler -arch=sm_80  -DNDEBUG
 -- Default Release flags are `-O3;-march=native`, set RELEASE_FLAGS to override (CXX_EXTRA_* flags are not affected)
--- CXX vendor  : NVHPC (/opt/nvidia/hpc_sdk/Linux_x86_64/21.9/compilers/bin/nvc++)
+-- CXX vendor  : GNU (/usr/bin/c++)
 -- Platform    : x86_64
 -- Sources     : src/cuda/CUDAStream.cu
 -- Libraries   : 
--- CXX Flags   : -fast  -DNDEBUG -O3;-march=native -DDEBUG
+-- CXX Flags   :  -DNDEBUG -O3;-march=native -DDEBUG
     CXX flags derived from (CMake + (Override ? Override : Default) + Extras), where:
-        CMake                    = `-fast  -DNDEBUG`
+        CMake                    = ` -DNDEBUG`
         Default                  = `-O3;-march=native`
         Override (RELEASE_FLAGS) = ``
         Extras (CXX_EXTRA_FLAGS) = `-DDEBUG`
 -- Link Flags  :  -DDEBUG
 -- Linker Flags:   
--- Defs        : CUDA;MEM=DEFAULT
+-- Defs        : CUDA;DEFAULT
 -- Executable  : cuda-stream
--- Configuring done
--- Generating done
+-- Configuring done (4.5s)
+-- Generating done (0.0s)
 -- Build files have been written to: /home/jkwack/ALCFBeginnersGuide/polaris/examples/BabelStream/build_polaris
 
-jkwack@x3004c0s31b1n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream> cmake --build build_polaris
+jkwack@x3005c0s7b0n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream> cmake --build build_polaris
 [ 33%] Building CUDA object CMakeFiles/cuda-stream.dir/src/cuda/CUDAStream.cu.o
 [ 66%] Building CXX object CMakeFiles/cuda-stream.dir/src/main.cpp.o
 [100%] Linking CXX executable cuda-stream
 [100%] Built target cuda-stream
 
-jkwack@x3004c0s31b1n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream> cd build_polaris
+jkwack@x3005c0s7b0n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream> cd build_polaris/
 
-jkwack@x3004c0s31b1n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream/build_polaris> ./cuda-stream 
+jkwack@x3005c0s7b0n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream/build_polaris> ./cuda-stream 
 BabelStream
-Version: 4.0
+Version: 5.0
 Implementation: CUDA
 Running kernels 100 times
 Precision: double
 Array size: 268.4 MB (=0.3 GB)
 Total size: 805.3 MB (=0.8 GB)
 Using CUDA device NVIDIA A100-SXM4-40GB
-Driver: 11040
+Driver: 12020
+Memory: DEFAULT
+Reduction kernel config: 432 groups of (fixed) size 1024
+Init: 0.065250 s (=12341.874989 MBytes/sec)
+Read: 0.000748 s (=1077026.035391 MBytes/sec)
 Function    MBytes/sec  Min (sec)   Max         Average     
-Copy        1394571.325 0.00038     0.00039     0.00039     
-Mul         1356858.489 0.00040     0.00040     0.00040     
-Add         1369610.580 0.00059     0.00059     0.00059     
-Triad       1377425.601 0.00058     0.00059     0.00059     
-Dot         1210774.906 0.00044     0.00046     0.00045     
-
-
-
-
-
+Copy        1400256.415 0.00038     0.00039     0.00039     
+Mul         1360437.756 0.00039     0.00040     0.00040     
+Add         1369584.958 0.00059     0.00060     0.00059     
+Triad       1377517.491 0.00058     0.00060     0.00059     
+Dot         1353461.767 0.00040     0.00041     0.00040     
 ```
 
 ### Nsight Systems
@@ -196,86 +222,93 @@ Dot         1210774.906 0.00044     0.00046     0.00045
 
 #### Running a stream benchmark with Nsight Systems
 ```
-jkwack@x3004c0s31b1n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream/build_polaris> nsys profile -o nsys-BableStream --stats=true ./cuda-stream
+jkwack@x3005c0s7b0n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream/build_polaris> nsys profile -o nsys-BableStream --stats=true ./cuda-stream
 BabelStream
-Version: 4.0
+Version: 5.0
 Implementation: CUDA
 Running kernels 100 times
 Precision: double
 Array size: 268.4 MB (=0.3 GB)
 Total size: 805.3 MB (=0.8 GB)
 Using CUDA device NVIDIA A100-SXM4-40GB
-Driver: 11040
+Driver: 12020
+Memory: DEFAULT
+Reduction kernel config: 432 groups of (fixed) size 1024
+Init: 0.066406 s (=12126.945664 MBytes/sec)
+Read: 0.000765 s (=1052155.795696 MBytes/sec)
 Function    MBytes/sec  Min (sec)   Max         Average     
-Copy        1380773.347 0.00039     0.00040     0.00039     
-Mul         1339057.277 0.00040     0.00041     0.00040     
-Add         1357947.578 0.00059     0.00060     0.00059     
-Triad       1366674.928 0.00059     0.00061     0.00059     
-Dot         1221315.862 0.00044     0.00047     0.00046     
-Generating '/var/tmp/pbs.443287.polaris-pbs-01.hsn.cm.polaris.alcf.anl.gov/nsys-report-0f92.qdstrm'
+Copy        1375100.627 0.00039     0.00040     0.00039     
+Mul         1342039.721 0.00040     0.00040     0.00040     
+Add         1364493.572 0.00059     0.00059     0.00059     
+Triad       1373162.696 0.00059     0.00059     0.00059     
+Dot         1334752.718 0.00040     0.00041     0.00041     
+Generating '/var/tmp/pbs.2022713.polaris-pbs-01.hsn.cm.polaris.alcf.anl.gov/nsys-report-2abb.qdstrm'
 [1/8] [========================100%] nsys-BableStream.nsys-rep
 [2/8] [========================100%] nsys-BableStream.sqlite
-[3/8] Executing 'nvtxsum' stats report
+[3/8] Executing 'nvtx_sum' stats report
 SKIPPED: /home/jkwack/ALCFBeginnersGuide/polaris/examples/BabelStream/build_polaris/nsys-BableStream.sqlite does not contain NV Tools Extension (NVTX) data.
-[4/8] Executing 'osrtsum' stats report
+[4/8] Executing 'osrt_sum' stats report
 
- Time (%)  Total Time (ns)  Num Calls    Avg (ns)     Med (ns)    Min (ns)   Max (ns)    StdDev (ns)        Name     
- --------  ---------------  ---------  ------------  -----------  --------  -----------  ------------  --------------
-     85.4      600,324,911         20  30,016,245.6  2,954,740.5     1,874  100,153,187  42,448,177.7  poll          
-     13.9       97,981,690      1,201      81,583.4     32,832.0     1,001   12,135,694     409,614.9  ioctl         
-      0.2        1,576,358         79      19,953.9     16,831.0     3,777      582,252      64,452.5  mmap64        
-      0.1          933,197         12      77,766.4     44,122.5    15,760      477,445     127,146.2  sem_timedwait 
-      0.1          908,730         51      17,818.2      2,304.0     1,242      750,938     104,774.6  fopen         
-      0.1          591,044        120       4,925.4      4,534.0     1,713       26,640       2,557.2  open64        
-      0.1          556,242          4     139,060.5    134,597.0    73,047      214,001      73,033.8  pthread_create
-      0.0          116,960         18       6,497.8      5,911.0     1,553       21,280       4,925.1  mmap          
-      0.0           67,907         11       6,173.4      2,265.0     1,282       27,632       7,883.2  munmap        
-      0.0           35,577          1      35,577.0     35,577.0    35,577       35,577           0.0  fgets         
-      0.0           32,451          6       5,408.5      5,250.0     2,585        8,426       2,375.3  open          
-      0.0           26,230         13       2,017.7      1,964.0     1,393        3,427         531.1  write         
-      0.0           21,180          3       7,060.0      6,042.0     5,691        9,447       2,074.6  putc          
-      0.0           19,846         13       1,526.6      1,473.0     1,012        2,615         511.0  read          
-      0.0           18,107          9       2,011.9      1,403.0     1,022        7,124       1,928.2  fclose        
-      0.0           11,230          2       5,615.0      5,615.0     3,646        7,584       2,784.6  socket        
-      0.0           10,299          1      10,299.0     10,299.0    10,299       10,299           0.0  connect       
-      0.0            9,528          2       4,764.0      4,764.0     3,016        6,512       2,472.0  fread         
-      0.0            8,526          2       4,263.0      4,263.0     1,032        7,494       4,569.3  fcntl         
-      0.0            6,592          1       6,592.0      6,592.0     6,592        6,592           0.0  pipe2         
-      0.0            6,552          2       3,276.0      3,276.0     2,405        4,147       1,231.8  fwrite        
-      0.0            1,142          1       1,142.0      1,142.0     1,142        1,142           0.0  bind          
+ Time (%)  Total Time (ns)  Num Calls    Avg (ns)      Med (ns)    Min (ns)   Max (ns)    StdDev (ns)        Name     
+ --------  ---------------  ---------  ------------  ------------  --------  -----------  ------------  --------------
+     63.7      601,029,880         19  31,633,151.6  15,201,463.0     5,490  100,146,184  41,789,533.1  poll          
+     33.2      313,402,461      1,055     297,063.9      14,147.0     1,042   36,079,881   1,326,292.7  ioctl         
+      2.4       22,359,798         56     399,282.1       4,754.0     2,354   18,287,435   2,450,902.6  fopen         
+      0.4        3,882,369         42      92,437.4       7,954.5     6,251    2,831,364     434,274.6  mmap64        
+      0.1        1,392,194         12     116,016.2      70,001.5    37,340      660,340     172,190.1  sem_timedwait 
+      0.1          513,244          4     128,311.0     125,706.5   110,397      151,434      17,599.5  pthread_create
+      0.1          499,648         83       6,019.9       5,460.0     3,146       18,415       1,807.5  open64        
+      0.0          171,063         20       8,553.2       3,151.0     1,002       95,019      20,557.3  mmap          
+      0.0           92,647         47       1,971.2       1,914.0     1,242        3,356         412.4  fclose        
+      0.0           65,273          1      65,273.0      65,273.0    65,273       65,273           0.0  fgets         
+      0.0           50,594         12       4,216.2       3,246.0     2,214       10,810       2,553.9  munmap        
+      0.0           43,243          7       6,177.6       5,641.0     2,716        9,628       2,592.3  open          
+      0.0           35,380         16       2,211.3       2,430.0     1,242        3,336         625.8  read          
+      0.0           30,740          8       3,842.5       3,552.5     1,002        7,825       2,956.4  putc          
+      0.0           26,039         12       2,169.9       2,119.0     1,353        3,637         568.6  write         
+      0.0           21,049          2      10,524.5      10,524.5     7,704       13,345       3,988.8  fread         
+      0.0           16,080          1      16,080.0      16,080.0    16,080       16,080           0.0  dup           
+      0.0           12,453          2       6,226.5       6,226.5     3,867        8,586       3,336.8  socket        
+      0.0            9,679          1       9,679.0       9,679.0     9,679        9,679           0.0  connect       
+      0.0            8,265          1       8,265.0       8,265.0     8,265        8,265           0.0  pipe2         
+      0.0            5,129          2       2,564.5       2,564.5     1,663        3,466       1,274.9  fwrite        
+      0.0            2,845          2       1,422.5       1,422.5     1,262        1,583         227.0  fcntl         
+      0.0            1,633          1       1,633.0       1,633.0     1,633        1,633           0.0  listen        
+      0.0            1,262          1       1,262.0       1,262.0     1,262        1,262           0.0  bind          
 
-[5/8] Executing 'cudaapisum' stats report
+[5/8] Executing 'cuda_api_sum' stats report
 
- Time (%)  Total Time (ns)  Num Calls    Avg (ns)    Med (ns)   Min (ns)   Max (ns)    StdDev (ns)           Name         
- --------  ---------------  ---------  ------------  ---------  --------  -----------  ------------  ---------------------
-     42.4      197,136,841        401     491,613.1  529,743.0   384,591      601,517      97,227.2  cudaDeviceSynchronize
-     34.1      158,470,102          4  39,617,525.5  312,771.5   150,142  157,694,417  78,717,966.1  cudaMalloc           
-     22.9      106,782,867        103   1,036,726.9  453,751.0   434,905   20,583,003   3,384,488.9  cudaMemcpy           
-      0.4        1,754,850        501       3,502.7    3,347.0     3,095       30,477       1,382.9  cudaLaunchKernel     
-      0.2        1,162,069          4     290,517.3  301,670.5   130,415      428,313     122,296.4  cudaFree             
+ Time (%)  Total Time (ns)  Num Calls   Avg (ns)    Med (ns)   Min (ns)   Max (ns)   StdDev (ns)           Name         
+ --------  ---------------  ---------  -----------  ---------  --------  ----------  -----------  ----------------------
+     64.1      196,349,940        401    489,650.7  526,138.0   384,652     590,688     96,584.8  cudaDeviceSynchronize 
+     34.9      106,875,399        103  1,037,625.2  404,820.0   398,438  23,138,581  3,673,961.7  cudaMemcpy            
+      0.6        1,715,255        501      3,423.7    2,755.0     2,474     233,538     10,375.7  cudaLaunchKernel      
+      0.3          829,027          4    207,256.8  205,476.0    72,135     345,940    112,008.3  cudaFree              
+      0.1          458,190          4    114,547.5  107,862.5    77,977     164,488     38,099.1  cudaMalloc            
+      0.0            2,535          1      2,535.0    2,535.0     2,535       2,535          0.0  cuModuleGetLoadingMode
 
-[6/8] Executing 'gpukernsum' stats report
+[6/8] Executing 'cuda_gpu_kern_sum' stats report
 
- Time (%)  Total Time (ns)  Instances  Avg (ns)   Med (ns)   Min (ns)  Max (ns)  StdDev (ns)      GridXYZ         BlockXYZ                                Name                           
- --------  ---------------  ---------  ---------  ---------  --------  --------  -----------  ---------------  --------------  ----------------------------------------------------------
-     24.5       58,455,846        100  584,558.5  584,109.0   583,165   595,325      2,238.9  32768    1    1  1024    1    1  void add_kernel<double>(const T1 *, const T1 *, T1 *)     
-     24.4       58,140,939        100  581,409.4  580,765.0   579,741   596,508      2,992.7  32768    1    1  1024    1    1  void triad_kernel<double>(T1 *, const T1 *, const T1 *)   
-     18.3       43,518,576        100  435,185.8  435,581.5   420,702   446,877      3,654.1   256    1    1   1024    1    1  void dot_kernel<double>(const T1 *, const T1 *, T1 *, int)
-     16.5       39,387,367        100  393,873.7  393,854.5   391,583   395,454        682.9  32768    1    1  1024    1    1  void mul_kernel<double>(T1 *, const T1 *)                 
-     16.1       38,370,919        100  383,709.2  383,646.0   379,486   396,862      1,629.7  32768    1    1  1024    1    1  void copy_kernel<double>(const T1 *, T1 *)                
-      0.2          523,101          1  523,101.0  523,101.0   523,101   523,101          0.0  32768    1    1  1024    1    1  void init_kernel<double>(T1 *, T1 *, T1 *, T1, T1, T1)    
+ Time (%)  Total Time (ns)  Instances  Avg (ns)   Med (ns)   Min (ns)  Max (ns)  StdDev (ns)                             Name                           
+ --------  ---------------  ---------  ---------  ---------  --------  --------  -----------  ----------------------------------------------------------
+     25.0       58,234,880        100  582,348.8  582,333.0   581,341   583,741        505.9  void add_kernel<double>(const T1 *, const T1 *, T1 *)     
+     24.8       57,859,042        100  578,590.4  578,525.0   577,565   580,413        570.8  void triad_kernel<double>(T1 *, const T1 *, const T1 *)   
+     16.9       39,251,815        100  392,518.2  392,589.5   391,006   393,821        587.7  void mul_kernel<double>(T1 *, const T1 *)                 
+     16.6       38,722,376        100  387,223.8  387,005.5   382,910   391,837      1,786.4  void dot_kernel<double>(const T1 *, const T1 *, T1 *, int)
+     16.4       38,259,881        100  382,598.8  382,462.0   381,501   395,134      1,376.8  void copy_kernel<double>(const T1 *, T1 *)                
+      0.2          521,885          1  521,885.0  521,885.0   521,885   521,885          0.0  void init_kernel<double>(T1 *, T1 *, T1 *, T1, T1, T1)    
 
-[7/8] Executing 'gpumemtimesum' stats report
+[7/8] Executing 'cuda_gpu_mem_time_sum' stats report
 
- Time (%)  Total Time (ns)  Count  Avg (ns)   Med (ns)  Min (ns)   Max (ns)   StdDev (ns)      Operation     
- --------  ---------------  -----  ---------  --------  --------  ----------  -----------  ------------------
-    100.0       61,381,882    103  595,940.6   2,401.0     2,048  20,467,582  3,443,386.5  [CUDA memcpy DtoH]
+ Time (%)  Total Time (ns)  Count  Avg (ns)   Med (ns)  Min (ns)   Max (ns)   StdDev (ns)           Operation          
+ --------  ---------------  -----  ---------  --------  --------  ----------  -----------  ----------------------------
+    100.0       66,303,506    103  643,723.4   2,432.0     2,400  22,998,241  3,722,456.6  [CUDA memcpy Device-to-Host]
 
-[8/8] Executing 'gpumemsizesum' stats report
+[8/8] Executing 'cuda_gpu_mem_size_sum' stats report
 
- Total (MB)  Count  Avg (MB)  Med (MB)  Min (MB)  Max (MB)  StdDev (MB)      Operation     
- ----------  -----  --------  --------  --------  --------  -----------  ------------------
-    805.511    103     7.820     0.002     0.002   268.435       45.361  [CUDA memcpy DtoH]
+ Total (MB)  Count  Avg (MB)  Med (MB)  Min (MB)  Max (MB)  StdDev (MB)           Operation          
+ ----------  -----  --------  --------  --------  --------  -----------  ----------------------------
+    805.652    103     7.822     0.003     0.003   268.435       45.360  [CUDA memcpy Device-to-Host]
 
 Generated:
     /home/jkwack/ALCFBeginnersGuide/polaris/examples/BabelStream/build_polaris/nsys-BableStream.nsys-rep
@@ -290,17 +323,19 @@ Generated:
 ### Nsight Compute
 #### Running a stream benchmark with Nsight Compute for triad_kernel
 ```
-jkwack@x3004c0s31b1n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream/build_polaris> ncu --set detailed -k regex:"triad|add" -o ncu-triad_add-BableStream ./cuda-stream
+jkwack@x3005c0s7b0n0:~/ALCFBeginnersGuide/polaris/examples/BabelStream/build_polaris> ncu --set detailed -k regex:"triad|add" -o ncu-triad_add-BableStream ./cuda-stream
 BabelStream
-Version: 4.0
+Version: 5.0
 Implementation: CUDA
 Running kernels 100 times
 Precision: double
 Array size: 268.4 MB (=0.3 GB)
 Total size: 805.3 MB (=0.8 GB)
-==PROF== Connected to process 47488 (/home/jkwack/ALCFBeginnersGuide/polaris/examples/BabelStream/build_polaris/cuda-stream)
+==PROF== Connected to process 2881032 (/home/jkwack/ALCFBeginnersGuide/polaris/examples/BabelStream/build_polaris/cuda-stream)
 Using CUDA device NVIDIA A100-SXM4-40GB
-Driver: 11040
+Driver: 12020
+Memory: DEFAULT
+Reduction kernel config: 432 groups of (fixed) size 1024
 ==PROF== Profiling "add_kernel": 0%....50%....100% - 18 passes
 ==PROF== Profiling "triad_kernel": 0%....50%....100% - 18 passes
 ==PROF== Profiling "add_kernel": 0%....50%....100% - 18 passes
@@ -501,13 +536,15 @@ Driver: 11040
 ==PROF== Profiling "triad_kernel": 0%....50%....100% - 18 passes
 ==PROF== Profiling "add_kernel": 0%....50%....100% - 18 passes
 ==PROF== Profiling "triad_kernel": 0%....50%....100% - 18 passes
+Init: 0.050909 s (=15818.576952 MBytes/sec)
+Read: 0.001929 s (=417377.857432 MBytes/sec)
 Function    MBytes/sec  Min (sec)   Max         Average     
-Copy        1327610.078 0.00040     0.00049     0.00041     
-Mul         1298750.316 0.00041     0.00042     0.00042     
-Add         2835.967    0.28396     0.29772     0.28652     
-Triad       2835.097    0.28405     0.28949     0.28621     
-Dot         844053.045  0.00064     0.00073     0.00068     
-==PROF== Disconnected from process 47488
+Copy        1309438.055 0.00041     0.00043     0.00042     
+Mul         1278726.854 0.00042     0.00044     0.00042     
+Add         614.751     1.30997     1.41680     1.33166     
+Triad       615.024     1.30939     1.40494     1.32698     
+Dot         959501.640  0.00056     0.00073     0.00065     
+==PROF== Disconnected from process 2881032
 ==PROF== Report: /home/jkwack/ALCFBeginnersGuide/polaris/examples/BabelStream/build_polaris/ncu-triad_add-BableStream.ncu-rep
 ```
 

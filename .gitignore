@@ -1,3 +1,4 @@
 *.ER
 *.OU
-logs
+*.DS_Store
+*.swp
