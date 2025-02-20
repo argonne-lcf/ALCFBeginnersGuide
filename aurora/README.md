@@ -22,7 +22,7 @@ Aurora is an Intel GPU -based system.
 
 Aurora Machine Specs
 * Speed: 
-  * [HPL](https://top500.org/system/180183/): 1.012 exaflops 
+  * [HPL](https://top500.org/system/180183/): 1.012 exaflops (#3 in November 2024's TOP500 List - [link](https://www.top500.org/lists/top500/list/2024/11/))
   * [HPL-MxP](https://hpl-mxp.org/results.md): 10.6 exaflops
 * 10,624 Total Nodes
   * 166 Cabinents
