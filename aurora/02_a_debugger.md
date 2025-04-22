@@ -10,7 +10,7 @@
 * How to run `gdb-oneapi` and `ddt` debuggers with your applications on Aurora
 
 
-## Prelimimaries
+## Preliminaries
 To use debuggers, you need to compile and link your application with `-g`. To get anywhere with GPU debugging, the current best practice is to compile and link with `-g -O0`.
 
 Before debugging your applications on Aurora, you must explicitly enable GPU debugging configurations on all the GPUs you are using, on all the nodes you are using. One way to do this is to create a script (`helper_toggle_eu_debug.sh`) and execute it across all your compute nodes using mpiexec. Here is an example script, which takes an argument 1 to enable debugging or 0 to disable it:
