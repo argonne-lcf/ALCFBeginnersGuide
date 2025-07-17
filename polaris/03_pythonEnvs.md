@@ -101,6 +101,19 @@ module load conda; conda activate /path/to/envs/myclone
 ## Additional Resources
 
 - [ALCF Docs: Python on Polaris](https://docs.alcf.anl.gov/polaris/data-science-workflows/python/)
+## Existing issue and solution
 
+There is an issue with the current conda environment. One may encounter the following error message:
 
-# [NEXT ->](04_jupyterNotebooks.md)
+```bash
+aborting job:
+MPIDI_CRAY_init: GPU_SUPPORT_ENABLED is requested, but GTL library is not linked
+```
+
+To address this, please add the following line at the very beginning of your Python script.
+
+```python
+from mpi4py import MPI
+```
+
+# [NEXT ->](04_pytorch.md)
