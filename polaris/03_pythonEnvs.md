@@ -100,7 +100,7 @@ module load conda; conda activate /path/to/envs/myclone
 
 ## Additional Resources
 
-- [ALCF Docs: Python on Polaris](https://docs.alcf.anl.gov/polaris/data-science-workflows/python/)
+- [ALCF Docs: Python on Polaris](https://docs.alcf.anl.gov/polaris/data-science/python/)
 ## Existing issue and solution
 
 There is an issue with the current conda environment. One may encounter the following error message:
